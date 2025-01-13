@@ -1,0 +1,76 @@
+/* style.css*/
+body {
+    font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+    margin: 0; /* 기본 여백 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    display: flex; /* 화면 중앙 정렬을 위해 Flexbox 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 100vh; /* 화면 전체 높이를 채움 */
+    background-color: #f0f0f0; /* 배경색 설정 */
+}
+
+/* 컨테이너 스타일 */
+ .container {
+    background: white; /* 컨테이너 배경색 */
+    padding: 20px; /* 안쪽 여백 */
+    border-radius: 8px; /* 둥근 모서리 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    width: 300px; /* 컨테이너 너비 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+ }
+
+  /* 제목 스타일 */
+  h1 {
+    margin-bottom: 20px; /* 아래 여백 */
+  }
+
+  /* 입력 필드와 라벨 감싸는 그룹 */
+  .form-group {
+    margin-bottom: 15px; /* 입력 필드 간 여백 */
+    text-align: left; /* 왼쪽 정렬 */
+  }
+
+  /* 라벨 스타일 */
+  label {
+    display: block; /* 블록 요소로 푯히 */
+    margin-bottom: 5px; /* 아래 여백 */
+    font-weight: bold; /* 굵은 글씨 */
+  }
+
+  /* 입력 필드 스타일 */
+  input {
+    width: 100%; /* 입력 필드의 너비를 부모 요소에 맞춤 */
+    padding: 8px; /* 안쪽 여백 */
+    margin-bottom: 10px; /* 아래 여백 */
+    border: 1px solid #ccc; /* 입력 필드 테두리 */
+    border-radius: 4px; /* 둥근 모서리 */
+  }
+
+  /* 버튼 스타일 */
+  button {
+    background-color: #007bff; /* 버튼 배경색 */
+    color: white; /* 글자색 */
+    border: none; /* 테두리 제거 */
+    padding: 10px; /* 안쪽 여백 */
+    width: 100%; /* 버튼 너비를 부모 요소에 맞춤 */
+    border-radius: 4px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 포인터 변경 */
+    font-size: 16px; /* 글자 크기 */
+  }
+
+  /* 버튼 호버 효과 */
+  button:hover { 
+    background-color: #0056b3; /* 호버 시 배경색 변경 */
+  }
+
+  /* 링크 스타일 */
+  a {
+    color: #007bff; /* 링크 글자색 */ 
+    text-decoration: none; /* 밑줄 제거 */
+  }
+
+  /* 링크 호버 효과 */
+  a:hover {
+    text-decoration: underline; /* 호버 시 밑줄 표시 */
+  }
