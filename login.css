@@ -20,69 +20,90 @@ body {
     border-radius: 16px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 30px 20px;
-    width: 400px; /* 전체 박스 너비 */
+    width: 90%; /* 가로는 화면의 90%를 차지 */
+    max-width: 400px; /* 최대 가로 크기 제한 */
+    height: auto; /* 세로 길이는 내용에 따라 자동 */
+    min-height: 500px; /* 최소 세로 길이 설정 */
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
 
 /* 로고 스타일 */
-.logo img {
-    width: 100px;
+.logo {
+    text-align: center;
     margin-bottom: 20px;
+}
+
+.logo img {
+    width: 80px; /* 모바일 환경에 적합한 크기 */
+    max-width: 100%; /* 화면 크기에 따라 축소 */
 }
 
 /* 제목 스타일 */
-.content-box h1 {
-    font-size: 24px;
+h1 {
+    margin: 0 0 20px 0; /* 아래 여백만 적용 */
+    font-size: 22px; /* 제목 크기 */
+    text-align: center;
     color: #333;
-    margin-bottom: 20px;
 }
 
-/* 로그인 박스 스타일 */
-.content-box form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* 입력 필드 간격 */
-    width: 100%;
-}
-
-.content-box input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
+/* 입력 필드와 버튼 스타일 */
+input, button {
+    width: 100%; /* 부모 컨테이너의 너비에 맞춤 */
+    padding: 12px; /* 버튼과 입력 필드 높이 조정 */
+    font-size: 16px; /* 적당한 크기 */
     border-radius: 4px;
-    font-size: 16px;
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+    margin-bottom: 15px; /* 아래 여백 추가 */
 }
 
-.content-box .login-btn {
-    width: 100%;
-    padding: 10px;
+/* 입력 필드 스타일 */
+input {
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+/* 로그인 버튼 스타일 */
+button {
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
 }
 
-.content-box .login-btn:hover {
+button:hover {
     background-color: #0056b3;
 }
 
-/* 회원가입 버튼 스타일 */
+/* 추가 버튼 스타일 */
 .extra-buttons {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .extra-buttons .register-btn {
-    width: 100%;
-    padding: 10px;
     background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
 }
 
 .extra-buttons .register-btn:hover {
     background-color: #218838;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 20px 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .logo img {
+        width: 70px;
+    }
 }
