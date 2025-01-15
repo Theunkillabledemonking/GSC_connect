@@ -1,24 +1,33 @@
-// script.js
+// 로그인 처리 함수
+function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-// HTML에서 폼 요소를 가져옴
-
-const form = document.getElementById('loginForm'); // 폼 전체를 나타냄
-const usernameInput = document.getElementById('username'); // 아이디 입력 필드
-const passwordInput = document.getElementById('password'); // 비밀번호 입력 필드
-
-// 폼 제출 이벤트 리스너 등록
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // 폼의 기본 동작(페이지 새로고침)을 막음
-
-    // 이벤트 값을 변수에 저장
-    const username = usernameInput.value; // 사용자가 입력한 아이디 값
-    const password = passwordInput.value; // 사용자가 입력한 비밀번호 값
-
-    // 아이디 또는 비밀번호가 비어 있는 경우 경고
-    if (username === '' || password === '') {
-        alert('아이디와 비밀번호를 입력해주세요.'); // 경고 메세지 출력
+    if (!username || !password) {
+        alert('아이디와 비밀번호를 입력해주세요.');
     } else {
-        // 정상적인 입력일 경우 환영 메시지 출력
         alert(`환영합니다, ${username}님!`);
+        // 서버로 로그인 데이터 전송 (예: fetch API)
     }
-})
+}
+
+// 회원가입 처리 함수
+function handleSignup(event) {
+    event.preventDefault();
+    const studentId = document.getElementById('studentId').value;
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const password = document.getElementById('signupPassword').value;
+
+    if (!studentId || !name || !phone || !password) {
+        alert('모든 필드를 입력해주세요.');
+    } else {
+        alert(`회원가입 완료: ${name}`);
+        // 서버로 회원가입 데이터 전송 (예: fetch API)
+    }
+}
+
+// 각각의 폼 이벤트 리스너 등록
+document.getElementById('loginForm').addEventListener('submit', handleLogin);
+document.getElementById('signupForm').addEventListener('submit', handleSignup);
