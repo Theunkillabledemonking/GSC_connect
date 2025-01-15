@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 로고 -->
+        <div class="logo">
+            <img src="gsc.png" alt="학교 로고">
+        </div>
+        <!-- 제목 -->
+        <h1>환영합니다!</h1>
+        <!-- 공지사항 및 시간표 버튼 -->
+        <div class="main-boxes">
+            <div class="box">
+                <h2>전체 공지사항</h2>
+                <button onclick="navigateTo('all-notices.html')">보기</button>
+            </div>
+            <div class="box">
+                <h2>학년별 공지사항</h2>
+                <button onclick="navigateTo('grade-notices.html')">보기</button>
+            </div>
+            <div class="box">
+                <h2>시간표</h2>
+                <button onclick="navigateTo('schedule.html')">보기</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page; // 페이지 이동
+        }
+    </script>
+</body>
+</html>

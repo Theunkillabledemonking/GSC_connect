@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="singup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="gsc.png" alt="학교 로고">
+        </div>
+        <div class="signup-box">
+            <h1>회원가입</h1>
+            <form id="signupForm">
+                <input type="text" id="studentId" placeholder="학번" required>
+                <input type="text" id="name" placeholder="이름" required>
+                <input type="text" id="phone" placeholder="연락처" required>
+                <input type="password" id="password" placeholder="비밀번호" required>
+                <button type="submit" class="signup-btn">가입하기</button>
+            </form>
+            <div class="extra-buttons">
+                <button class="back-btn" onclick="navigateToLogin()">돌아가기</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
