@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 페이지</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/public/css/login.css">
 </head>
 <body>
     <div class="container">
         <!-- 로고 -->
         <div class="logo">
-            <img src="gsc.png" alt="학교 로고">
+            <img src="/public/img/gsc.png" alt="학교 로고">
         </div>
         <!-- 로그인 박스 -->
         <div class="content-box">
-            <h1>글로벌시스템융합과</h1>
-            <form id="loginForm">
-                <input type="text" id="username" placeholder="아이디" required>
+            <h1>영진전문대학교</h1>
+            <h2>글로벌시스템융합과</h2>
+            <form action="login.php" method="post"> <!-- login.php로 POST 요청 -->
+                <input type="text" id="identifier" placeholder="아이디" required>
                 <input type="password" id="password" placeholder="비밀번호" required>
                 <button type="submit" class="login-btn">로그인</button>
             </form>
@@ -30,7 +31,7 @@
             window.location.href = "signup.html"; // 회원가입 페이지로 이동
         }
     </script>
-    <script src="script.js"></script>
+    <!-- <script src="/public/js/login.js"></script> -->
 </body>
 </html>
 

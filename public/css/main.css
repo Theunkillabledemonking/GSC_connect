@@ -82,3 +82,24 @@ body {
     background-color: #0056b3;
     color: white;
 }
+
+/* 관리자 전용 박스 스타일 */
+.admin-box {
+    background-color: #dc3545; /* 빨간색 배경 */
+    color: white;
+}
+
+.admin-box button {
+    background-color: white;
+    color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.admin-box button:hover {
+    background-color: #a71d2a; /* 어두운 빨간색 */
+    color: white;
+}

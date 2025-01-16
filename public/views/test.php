@@ -1,4 +1,4 @@
-<?php
+/*<?php
 // 데이터베이스 연결
 $conn = new mysqli('localhost', 'root', '', 'school_portal');
 if ($conn->connect_error) {
@@ -65,4 +65,4 @@ $timetableResult = $conn->query("SELECT grade, subject, time_slot FROM timetable
 <?php
 // 데이터베이스 연결 종료
 $conn->close();
-?>
+?> */

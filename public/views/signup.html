@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="singup.css">
+    <link rel="stylesheet" href="/public/css/singup.css">
 </head>
 <body>
     <div class="container">
         <div class="logo">
-            <img src="gsc.png" alt="학교 로고">
+            <img src="/public/img/gsc.png" alt="학교 로고">
         </div>
         <h1>회원가입</h1>
-        <form id="signupForm">
+        <form id="signupForm" action="signup.php" method="post">
             <input type="text" id="studentId" placeholder="학번" required>
             <input type="text" id="name" placeholder="이름" required>
+            <input type="email" id="email" placeholder="이메일" required>
             <input type="text" id="phone" placeholder="연락처" required>
             <input type="password" id="password" placeholder="비밀번호" required>
             <button type="submit" class="signup-btn">가입하기</button>
@@ -22,6 +23,6 @@
         <button class="back-btn" onclick="navigateToLogin()">돌아가기</button>
     </div>
     </div>
-    <script src="script.js"></script>
+    <script src="/public/js/singup.js"></script>
 </body>
 </html>

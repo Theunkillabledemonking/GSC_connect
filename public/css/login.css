@@ -46,6 +46,12 @@ h1 {
     color: #333;
 }
 
+h2 {
+    font-size: 22px; /* 제목 크기 */
+    text-align: center;
+    color: #333;
+}
+
 /* 입력 필드와 버튼 스타일 */
 input, button {
     width: 100%; /* 부모 컨테이너의 너비에 맞춤 */

@@ -1,3 +1,11 @@
+<?php
+// 세션 시작
+session_start();
+
+// 사용자의 역할(role)을 확인
+$role = $_SESSION['role'] ?? 'guest'; // 세션에서 역할을 가져오고 기본값은 'guest'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +26,23 @@
         <div class="main-boxes">
             <div class="box">
                 <h2>전체 공지사항</h2>
-                <button onclick="navigateTo('all-notices.html')">보기</button>
+                <button onclick="navigateTo('all-notices.php')">보기</button>
             </div>
             <div class="box">
                 <h2>학년별 공지사항</h2>
-                <button onclick="navigateTo('grade-notices.html')">보기</button>
+                <button onclick="navigateTo('grade-notices.php')">보기</button>
             </div>
             <div class="box">
                 <h2>시간표</h2>
-                <button onclick="navigateTo('schedule.html')">보기</button>
+                <button onclick="navigateTo('schedule.php')">보기</button>
             </div>
+            <!-- 관리자만 볼 수 있는 승인관리 버튼 -->
+            <?php if ($role === 'admin'): ?>
+            <div class="box admin-box">
+                <h2>승인 관리</h2>
+                <button onclick="navigateTo('approval-management.php')">관리</button>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
     <script>
