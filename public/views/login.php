@@ -1,5 +1,5 @@
 <?php
-include '../src/config/database.php'; // 데이터베이스 연결
+include '../../src/config/database.php'; // 데이터베이스 연결
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $identifier = $_POST['identifier']; // 학번 또는 이메일
@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($user['role'] === 'admin') {
                 header("Location: dashboard.php"); // 관리자 페이지로 이동
             } elseif ($user['role'] === 'student') {
-                header("Location: dashboard.php"); // 학생 페이지로 이동
+                header("Location: ../../views/main.php"); // 학생 페이지로 이동
             }
-            exit; // 스크립트 종료
+            exit;
         } else {
             echo "<script>alert('비밀번호가 올바르지 않습니다.');</script>";
         }
@@ -38,22 +38,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 }
-?>
-
-<?php
-include '../src/config/database.php'; // database.php 포함
-
-// 데이터베이스 연결 사용
-$sql = "SELECT * FROM users";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "이름: " . $row["name"] . "<br>";
-    }
-} else {
-    echo "데이터가 없습니다.";
-}
-
-$conn->close(); // 연결 닫기
 ?>

@@ -30,11 +30,11 @@ $role = $_SESSION['role'] ?? 'guest'; // 세션에서 역할을 가져오고 기
             </div>
             <div class="box">
                 <h2>학년별 공지사항</h2>
-                <button onclick="navigateTo('grade-notices.php')">보기</button>
+                <button onclick="navigateTo('grade-notices.html')">보기</button>
             </div>
             <div class="box">
                 <h2>시간표</h2>
-                <button onclick="navigateTo('schedule.php')">보기</button>
+                <button onclick="navigateTo('schedule.html')">보기</button>
             </div>
             <!-- 관리자만 볼 수 있는 승인관리 버튼 -->
             <?php if ($role === 'admin'): ?>
