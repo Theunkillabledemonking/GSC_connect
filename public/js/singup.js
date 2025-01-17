@@ -27,7 +27,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (even
     signupButton.textContent = "처리 중...";
 
     // 서버로 회원가입 요청
-    fetch("signup.php", {
+    fetch("../views/signup.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -49,7 +49,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (even
         .then((data) => {
             if (data.success) {
                 alert(data.message); // 성공 메시지 출력
-                window.location.href = "index.html"; // 로그인 화면으로 이동
+                window.location.href = "../../index.html"; // 로그인 화면으로 이동
             } else {
                 alert(data.message || "회원가입 실패"); // 오류 메시지 출력
             }
