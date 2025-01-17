@@ -27,7 +27,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (even
     signupButton.textContent = "처리 중...";
 
     // 서버로 회원가입 요청
-    fetch("../views/signup.php", {
+    fetch("views/signup.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -44,15 +44,11 @@ document.getElementById("signupForm")?.addEventListener("submit", function (even
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.json();
+            return response.text(); // JSON 응답 대신 텍스트로 받음
         })
-        .then((data) => {
-            if (data.success) {
-                alert(data.message); // 성공 메시지 출력
-                window.location.href = "../../index.html"; // 로그인 화면으로 이동
-            } else {
-                alert(data.message || "회원가입 실패"); // 오류 메시지 출력
-            }
+        .then((message) => {
+            alert(message); // 서버에서 받은 응답 출력
+            window.location.href = "index.html"; // 로그인 화면으로 이동
         })
         .catch((error) => {
             console.error("회원가입 오류:", error);
