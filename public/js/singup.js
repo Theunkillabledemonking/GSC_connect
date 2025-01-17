@@ -1,10 +1,10 @@
 document.getElementById("signupForm")?.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const studentId = document.getElementById("studentId").value;
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
+    const studentId = document.getElementById("studentId").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
     const password = document.getElementById("password").value;
 
     // 데이터 유효성 검사
@@ -27,7 +27,7 @@ document.getElementById("signupForm")?.addEventListener("submit", function (even
     signupButton.textContent = "처리 중...";
 
     // 서버로 회원가입 요청
-    fetch("views/signup.php", {
+    fetch("signup.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -44,11 +44,13 @@ document.getElementById("signupForm")?.addEventListener("submit", function (even
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.text(); // JSON 응답 대신 텍스트로 받음
+            return response.json();
         })
-        .then((message) => {
-            alert(message); // 서버에서 받은 응답 출력
-            window.location.href = "index.html"; // 로그인 화면으로 이동
+        .then((data) => {
+            alert(data.message);
+            if (data.success) {
+                window.location.href = "index.html"; // 로그인 화면으로 이동
+            }
         })
         .catch((error) => {
             console.error("회원가입 오류:", error);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="../css/singup.css">
+    <link rel="stylesheet" href="../css/signup.css">
 </head>
 <body>
     <div class="container">
@@ -12,7 +12,7 @@
             <img src="../img/gsc.png" alt="학교 로고">
         </div>
         <h1>회원가입</h1>
-        <form id="signupForm" action="signup.php" method="post">
+        <form id="signupForm">
             <input type="text" id="studentId" placeholder="학번" required>
             <input type="text" id="name" placeholder="이름" required>
             <input type="email" id="email" placeholder="이메일" required>
@@ -23,11 +23,10 @@
         <button class="back-btn" onclick="navigateToLogin()">돌아가기</button>
     </div>
     <script>
-        // 로그인 화면으로 이동하는 함수
         function navigateToLogin() {
             window.location.href = "../views/login.html"; // 로그인 페이지로 이동
         }
     </script>
-    <script src="../js/singup.js"></script>
+    <script src="../js/signup.js"></script>
 </body>
 </html>
