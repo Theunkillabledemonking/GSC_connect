@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="stylesheet" href="../css/signup.css"> <!-- 경로 수정 -->
 </head>
 <body>
-    <div class="container">
+    <div class="signup-container"> <!-- 클래스명 수정 -->
         <div class="logo">
-            <img src="../img/gsc.png" alt="학교 로고">
+            <img src="../img/gsc.png" alt="학교 로고"> <!-- 경로 수정 -->
         </div>
         <h1>회원가입</h1>
-        <form id="signupForm">
-            <input type="text" id="studentId" placeholder="학번" required>
-            <input type="text" id="name" placeholder="이름" required>
-            <input type="email" id="email" placeholder="이메일" required>
-            <input type="text" id="phone" placeholder="연락처" required>
-            <input type="password" id="password" placeholder="비밀번호" required>
+        <form id="signupForm"> <!-- signup-container 중복된 div 제거 -->
+            <input type="text" id="studentId" name="studentId" placeholder="학번" required>
+            <input type="text" id="name" name="name" placeholder="이름" required>
+            <input type="email" id="email" name="email" placeholder="이메일" required>
+            <input type="text" id="phone" name="phone" placeholder="연락처" required>
+            <input type="password" id="password" name="password" placeholder="비밀번호" required>
             <button type="submit" class="signup-btn">가입하기</button>
         </form>
         <button class="back-btn" onclick="navigateToLogin()">돌아가기</button>
     </div>
     <script>
         function navigateToLogin() {
-            window.location.href = "../views/login.html"; // 로그인 페이지로 이동
+            window.location.href = "../index.html"; // 로그인 페이지로 이동
         }
     </script>
-    <script src="../js/signup.js"></script>
+    <script src="../js/signup.js"></script> <!-- 경로 수정 -->
 </body>
 </html>

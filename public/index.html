@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,12 @@
             <img src="img/gsc.png" alt="학교 로고">
         </div>
         <!-- 로그인 박스 -->
-        <div class="content-box">
+        <div class="login-container">
             <h1>영진전문대학교</h1>
             <h2>글로벌시스템융합과</h2>
-            <form action="./views/login.php" method="post"> <!-- login.php로 POST 요청 -->
-                <input type="text" id="identifier" name="identifier" placeholder="아이디" required>
-                <input type="password" id="password" name="password" placeholder="비밀번호" required>
+            <form action="./views/login.php" method="POST"> <!-- login.php로 POST 요청 -->
+                <input type="text" name="student_id" placeholder="학번" required>
+                <input type="password" name="password" placeholder="비밀번호" required>
                 <button type="submit" class="login-btn">로그인</button>
             </form>
             <div class="extra-buttons">

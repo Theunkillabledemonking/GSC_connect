@@ -1,16 +1,15 @@
 <?php
-$host = '127.0.0.1';      // 호스트
-$username = 'root';       // 사용자명
-$port = '3306';
-$password = 'gsc1234!@#$';           // 비밀번호 (기본적으로는 비어 있음)
-$database = 'users'; // 데이터베이스 이름
+// database/db_connect.php
+$servername = "127.0.0.1";
+$username = "root";
+$password = "gsc1234!@#$";
+$dbname = "school_portal";
 
-$conn = new mysqli($host, $username, $password, $database, $port);
+// 데이터베이스 연결
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// 연결 오류 확인
+// 연결 확인
 if ($conn->connect_error) {
-    die('Database connection failed: ' . $conn->connect_error);
-} else {
-    echo "Database connected successfully!";
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>

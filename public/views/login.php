@@ -1,49 +1,38 @@
 <?php
-include '../src/config/database.php'; // 데이터베이스 연결
+require_once '../../src/config/database.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $identifier = $_POST['identifier'] ?? null;
-    $password = $_POST['password'] ?? null;
+// POST 요청 데이터 가져오기
+$student_id = $_POST['student_id'];
+$password = $_POST['password'];
 
-    if (!$identifier || !$password) {
-        header("Location: ../index.html?error=empty_fields");
-        exit;
-    }
+// 데이터베이스에서 사용자 정보 확인
+$stmt = $conn->prepare("SELECT * FROM users WHERE student_id = ?");
+$stmt->bind_param("s", $student_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // 사용자 조회
-    $sql = "SELECT * FROM users WHERE (student_id = ? OR email = ?) AND is_approved = 'approved'";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $identifier, $identifier);
-    $stmt->execute();
-    $result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password'])) {
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role'] = $user['role'];
+    // 비밀번호 검증
+    if (password_verify($password, $user['password'])) {
+        // 세션 시작 및 사용자 정보 저장
+        session_start();
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['student_id'] = $user['student_id'];
+        $_SESSION['name'] = $user['name'];
+        $_SESSION['role'] = $user['role'];
 
-            // 역할(role)에 따라 리디렉션
-            if ($user['role'] === 'admin') {
-                header("Location: ../views/admin_dashboard.php");
-            } else {
-                header("Location: ../views/main.php");
-            }
-            exit;
-        } else {
-            header("Location: ../index.html?error=invalid_password");
-            exit;
-        }
+        // 로그인 성공 후 메인 페이지로 이동
+        header("Location: main.php");
+        exit();
     } else {
-        header("Location: ../index.html?error=user_not_found");
-        exit;
+        echo "잘못된 비밀번호입니다.";
     }
-
-    $stmt->close();
-    $conn->close();
 } else {
-    header("Location: ../index.html?error=invalid_request");
-    exit;
+    echo "해당 학번으로 등록된 사용자가 없습니다.";
 }
+
+$stmt->close();
+$conn->close();
 ?>
