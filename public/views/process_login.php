@@ -2,7 +2,7 @@
 session_start();
 
 // 절대경로 기반으로 데이터베이스와 함수 파일 불러오기
-require_once(dirname(__DIR__, 2) . '/includes/db.php');
+require_once(dirname(__DIR__, 2) . '/`in`cludes/db.php');
 require_once(dirname(__DIR__, 2) . '/includes/functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
