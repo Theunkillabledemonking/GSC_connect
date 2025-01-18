@@ -12,12 +12,12 @@
             <img src="../img/gsc.png" alt="학교 로고"> <!-- 경로 수정 -->
         </div>
         <h1>회원가입</h1>
-        <form id="signupForm"> <!-- signup-container 중복된 div 제거 -->
-            <input type="text" id="studentId" name="studentId" placeholder="학번" required>
-            <input type="text" id="name" name="name" placeholder="이름" required>
-            <input type="email" id="email" name="email" placeholder="이메일" required>
-            <input type="text" id="phone" name="phone" placeholder="연락처" required>
-            <input type="password" id="password" name="password" placeholder="비밀번호" required>
+        <form action="signup.php" method="POST">
+            <input type="text" name="student_id" placeholder="학번" required>
+            <input type="text" name="name" placeholder="이름" required>
+            <input type="text" name="phone" placeholder="연락처" required>
+            <input type="email" name="email" placeholder="이메일" required>
+            <input type="password" name="password" placeholder="비밀번호" required>
             <button type="submit" class="signup-btn">가입하기</button>
         </form>
         <button class="back-btn" onclick="navigateToLogin()">돌아가기</button>
