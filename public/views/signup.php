@@ -2,7 +2,7 @@
 $pageTitle = "회원가입";
 
 // 헤더 포함
-include_once('../includes/header.php');
+include_once('../../includes/header.php');
 ?>
 
 <div class="container">
@@ -24,7 +24,7 @@ include_once('../includes/header.php');
     </form>
 
     <!-- 되돌아가기 버튼 -->
-    <a href="/views/index.php" class="back-button">로그인 화면으로 돌아가기</a>
+    <a href="../index.html" class="back-button">돌아가기</a>
 </div>
 
-<?php include_once('../includes/footer.php'); ?>
+<?php include_once('../../includes/footer.php'); ?>
