@@ -1,54 +1,42 @@
 <?php
-// 세션 시작
 session_start();
 
-// 사용자의 역할(role)을 확인
-$role = $_SESSION['role'] ?? 'guest'; // 세션에서 역할을 가져오고 기본값은 'guest'
+// 로그인 확인
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ./index.php");
+    exit;
+}
+
+$pageTitle = "메인화면";
+include_once(dirname(__DIR__, 2) . '/includes/header.php');
+
+// 사용자 정보
+$user_role = $_SESSION['role'];
+$user_name = $_SESSION['name'];
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인 페이지</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-    <div class="container">
-        <!-- 로고 -->
-        <div class="logo">
-            <img src="gsc.png" alt="학교 로고">
-        </div>
-        <!-- 제목 -->
-        <h1>환영합니다!</h1>
-        <!-- 공지사항 및 시간표 버튼 -->
-        <div class="main-boxes">
-            <div class="box">
-                <h2>전체 공지사항</h2>
-                <button onclick="navigateTo('all-notices.php')">보기</button>
-            </div>
-            <div class="box">
-                <h2>학년별 공지사항</h2>
-                <button onclick="navigateTo('grade-notices.html')">보기</button>
-            </div>
-            <div class="box">
-                <h2>시간표</h2>
-                <button onclick="navigateTo('schedule.html')">보기</button>
-            </div>
-            <!-- 관리자만 볼 수 있는 승인관리 버튼 -->
-            <?php if ($role === 'admin'): ?>
-            <div class="box admin-box">
-                <h2>승인 관리</h2>
-                <button onclick="navigateTo('approval-management.php')">관리</button>
-            </div>
-            <?php endif; ?>
-        </div>
-    </div>
-    <script>
-        function navigateTo(page) {
-            window.location.href = page; // 페이지 이동
-        }
-    </script>
-</body>
-</html>
+<div class="container">
+    <h1>GSC Portal 메인화면</h1>
+    <p>환영합니다, <strong><?php echo htmlspecialchars($user_name); ?></strong>님!</p>
+
+    <?php if ($user_role === 'admin'): ?>
+        <!-- 관리자 전용 메뉴 -->
+        <h2>관리자 메뉴</h2>
+        <ul>
+            <li><a href="./manage_users.php">사용자 관리</a></li>
+            <li><a href="./manage_notices.php">공지사항 관리</a></li>
+            <li><a href="./manage_timetable.php">시간표 관리</a></li>
+        </ul>
+    <?php else: ?>
+        <!-- 학생 전용 메뉴 -->
+        <h2>학생 메뉴</h2>
+        <ul>
+            <li><a href="./view_notices.php">공지사항 보기</a></li>
+            <li><a href="./view_timetable.php">시간표 보기</a></li>
+        </ul>
+    <?php endif; ?>
+
+    <a href="./logout.php" class="logout-button">로그아웃</a>
+</div>
+
+<?php include_once(dirname(__DIR__, 2) . '/includes/footer.php'); ?>

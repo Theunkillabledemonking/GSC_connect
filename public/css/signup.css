@@ -1,88 +1,86 @@
-/* 기본 스타일 초기화 */
 body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
-/* 컨테이너 스타일 */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* 위쪽부터 정렬 */
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 30px 20px;
-    width: 350px; /* 전체 박스 너비 */
-    max-width: 90%; /* 모바일 환경에서 적응 */
-    height: auto; /* 높이 자동 조정 */
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #004080;
+    color: white;
 }
 
-/* 로고 스타일 */
 .logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px; /* 로고 아래 여백 줄임 */
+    width: 80px;
+    height: auto;
 }
 
-.logo img {
-    width: 100px; /* 로고 크기 */
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 제목 스타일 */
 h1 {
-    margin: 15px 0; /* 제목 위아래 여백 */
-    font-size: 22px; /* 제목 크기 */
+    font-size: 24px;
     text-align: center;
     color: #333;
 }
 
-/* 입력 필드 스타일 */
-input {
-    width: 93%;
-    padding: 12px;
+form input {
+    width: 100%;
+    padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 16px;
 }
 
-/* 버튼 스타일 */
-button {
+form button {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    background-color: #007bff;
+    padding: 10px;
+    background-color: #004080;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
 
-button:hover {
-    background-color: #0056b3;
+form button:hover {
+    background-color: #003060;
 }
 
-/* 돌아가기 버튼 스타일 */
-.back-btn {
-    margin-top: 10px;
-    background-color: #6c757d;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-.back-btn:hover {
-    background-color: #5a6268;
+.success {
+    color: green;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 되돌아가기 버튼 스타일 */
+.back-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.back-button:hover {
+    background-color: #ccc;
 }

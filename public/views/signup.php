@@ -1,29 +1,30 @@
 <?php
-require_once '../src/config/database.php';
+$pageTitle = "회원가입";
 
-// POST 데이터 확인
-if (empty($_POST['student_id']) || empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['email']) || empty($_POST['password'])) {
-    die("Error: All fields are required.");
-}
-
-$student_id = $_POST['student_id'];
-$name = $_POST['name'];
-$phone = $_POST['phone'];
-$email = $_POST['email']; // email 값 추가
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-$role = 'student';
-$is_approved = 'pending';
-
-// 데이터 삽입 쿼리
-$stmt = $conn->prepare("INSERT INTO users (student_id, name, phone, email, password, role, is_approved) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssss", $student_id, $name, $phone, $email, $password, $role, $is_approved);
-
-if ($stmt->execute()) {
-    echo "회원가입 성공!";
-} else {
-    die("Error inserting data: " . $stmt->error);
-}
-
-$stmt->close();
-$conn->close();
+// 헤더 포함
+include_once('../includes/header.php');
 ?>
+
+<div class="container">
+    <h1>회원가입</h1>
+    <?php if (!empty($_GET['error'])): ?>
+        <p class="error"><?php echo htmlspecialchars($_GET['error']); ?></p>
+    <?php elseif (!empty($_GET['success'])): ?>
+        <p class="success"><?php echo htmlspecialchars($_GET['success']); ?></p>
+    <?php endif; ?>
+
+    <form method="POST" action="./process_signup.php" onsubmit="return checkInput()">
+        <input type="text" id="student_id" name="student_id" placeholder="학번" required>
+        <input type="text" id="name" name="name" placeholder="이름" required>
+        <input type="text" id="phone" name="phone" placeholder="전화번호" required>
+        <input type="email" id="email" name="email" placeholder="이메일" required>
+        <input type="password" id="password" name="password" placeholder="비밀번호" required>
+        <input type="password" id="password_confirm" name="password_confirm" placeholder="비밀번호 확인" required>
+        <button type="submit">회원가입</button>
+    </form>
+
+    <!-- 되돌아가기 버튼 -->
+    <a href="/views/index.php" class="back-button">로그인 화면으로 돌아가기</a>
+</div>
+
+<?php include_once('../includes/footer.php'); ?>
