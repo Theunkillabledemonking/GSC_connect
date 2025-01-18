@@ -2,7 +2,7 @@
 session_start();
 
 // 절대경로 기반으로 데이터베이스와 함수 파일 불러오기
-require_once(dirname(__DIR__, 2) . '/`in`cludes/db.php');
+require_once(dirname(__DIR__, 2) . '/includes/db.php');
 require_once(dirname(__DIR__, 2) . '/includes/functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 die("계정이 승인되지 않았습니다. 관리자에게 문의하세요.");
             }
 
-            $_SESSION['user_id'] = $user['student_id'];
+            $_SESSION['student_id'] = $user['student_id'];
             $_SESSION['name'] = $user['name'];
             $_SESSION['role'] = $user['role'];
 
