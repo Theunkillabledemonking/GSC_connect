@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSC Portal - 로그인</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GSC Portal</h1>
+        <div class="form-container">
+            <!-- 로그인 폼 -->
+            <form action="./index.php" method="POST">
+                <input type="text" name="student_id" placeholder="학번" required>
+                <input type="password" name="password" placeholder="비밀번호" required>
+                <button type="submit">LOG IN</button>
+            </form>
+            <div class="signup-link">
+                계정이 없으신가요? <a href="./views/signup.php">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
