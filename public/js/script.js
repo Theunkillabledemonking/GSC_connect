@@ -24,7 +24,7 @@ document.getElementById('loginForm')?.addEventListener('submit', function (event
 });
 
 // 회원가입 폼 제출 처리
-document.getElementById('signupForm')?.addEventListener('submit', function (event) {
+document.getElementById('signupForm"')?.addEventListener('submit', function (event) {
     event.preventDefault();
     const studentId = document.getElementById('studentId').value;
     const name = document.getElementById('name').value;
