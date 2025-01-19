@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = validateInput($_POST['password']);
     $password_confirm = validateInput($_POST['password_confirm']);
     $phone = validateInput($_POST['phone']);
-    $email = validateInput($_POST['eamil']);
     $role = 'student';
     $is_approved = 'pending';
 
@@ -22,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-    $query = "INSERT INTO users (student_id, name, password, phone, eamil, role, is_approved)
-              VALUES ('$student_id', '$name', '$hashed_password', '$phone', '$email', '$role', '$is_approved')";
+    $query = "INSERT INTO users (student_id, name, password, phone, role, is_approved)
+              VALUES ('$student_id', '$name', '$hashed_password', '$phone', '$role', '$is_approved')";
 
     if (mysqli_query($conn, $query)) {
         echo "회원가입 성공! <a href='../index.html'>로그인 하러 가기</a>";
