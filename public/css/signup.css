@@ -1,86 +1,86 @@
+/* 회원가입 페이지 스타일 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
+    background-color: #f4f6f8;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.header {
+.signup-container {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 20px;
-    background-color: #004080;
-    color: white;
-}
-
-.logo {
-    width: 80px;
-    height: auto;
-}
-
-.container {
+    width: 100%;
     max-width: 400px;
-    margin: 50px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.signup-title {
     font-size: 24px;
-    text-align: center;
-    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333333;
 }
 
-form input {
-    width: 100%;
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
-form button {
-    width: 100%;
+.input-field:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.signup-button {
     padding: 10px;
-    background-color: #004080;
-    color: white;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-form button:hover {
-    background-color: #003060;
+.signup-button:hover {
+    background-color: #0056b3;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-button:hover {
+    text-decoration: underline;
 }
 
 .error {
-    color: red;
-    text-align: center;
+    color: #ff0000;
+    font-size: 14px;
     margin-bottom: 10px;
 }
 
 .success {
-    color: green;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* 되돌아가기 버튼 스타일 */
-.back-button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 15px;
-    background-color: #ddd;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
+    color: #28a745;
     font-size: 14px;
-    text-align: center;
-}
-
-.back-button:hover {
-    background-color: #ccc;
+    margin-bottom: 10px;
 }
