@@ -5,8 +5,8 @@ require_once(dirname(__DIR__, 2) . '/includes/db.php');
 // POST 요청 확인
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 입력 값 가져오기
-    $student_id = mysqli_real_escape_string($conn, $_POST['student_id']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $student_id = trim($_POST['student_id']);
+    $password = trim($_POST['password']);
 
     // 학번으로 사용자 검색
     $query = "SELECT * FROM users WHERE student_id = ?";
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $user['password'])) {
             // 계정 승인 여부 확인
             if ($user['is_approved'] !== 'approved') {
-                echo "<script>alert('계정이 승인되지 않았습니다. 관리자에게 문의하세요.'); window.location.href='./login.php';</script>";
+                header("Location: ../index.php?error=account_not_approved");
                 exit;
             }
 
@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ./main.php?student_id=$student_id");
             exit;
         } else {
-            // 비밀번호가 틀렸을 경우
-            echo "<script>alert('비밀번호가 틀렸습니다.'); window.location.href='../index.php';</script>";
+            // 비밀번호가 틀린 경우
+            header("Location: ../index.php?error=incorrect_password");
             exit;
         }
     } else {
         // 학번이 존재하지 않을 경우
-        echo "<script>alert('학번이 존재하지 않습니다.'); window.location.href='../index.php';</script>";
+        header("Location: ../index.php?error=user_not_found");
         exit;
     }
 

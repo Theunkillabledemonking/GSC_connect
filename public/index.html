@@ -21,6 +21,22 @@
           />
           <button type="submit">LOG IN</button>
         </form>
+
+        <!-- 오류 메시지 표시 -->
+        <?php if (isset($_GET['error'])): ?>
+          <p class="error">
+            <?php
+            if ($_GET['error'] === 'incorrect_password') {
+                echo "비밀번호가 틀렸습니다.";
+            } elseif ($_GET['error'] === 'user_not_found') {
+                echo "학번이 존재하지 않습니다.";
+            } elseif ($_GET['error'] === 'account_not_approved') {
+                echo "계정이 승인되지 않았습니다.";
+            }
+            ?>
+          </p>
+        <?php endif; ?>
+
         <div class="signup-link">
           계정이 없으신가요? <a href="./views/signup.php">Sign Up</a>
         </div>
