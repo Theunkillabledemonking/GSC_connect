@@ -3,95 +3,121 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: #f4f6f8;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* 컨테이너 */
-.container {
-    text-align: center;
-    background: #ffffff;
-    padding: 20px 30px;
+/* 메인 컨테이너 */
+.main-container {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 90%;
+    overflow: hidden;
 }
 
-/* 환영 메시지 */
-.welcome {
+/* 헤더 */
+.header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
-    color: #333333;
-    margin-bottom: 20px;
+    border-bottom: 4px solid #0056b3;
 }
 
-/* 메인 박스들 */
-.main-boxes {
+/* 대시보드 */
+.dashboard {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
 }
 
-.box {
-    background: #f1f3f5;
-    padding: 15px;
-    border-radius: 8px;
+/* 카드 스타일 */
+.card {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.box:hover {
-    background: #e9ecef;
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-.box h2 {
-    margin: 0;
-    font-size: 18px;
-    color: #495057;
-}
-
-/* 버튼 스타일 */
-button {
-    margin-top: 10px;
+.card button {
     padding: 10px 20px;
-    font-size: 14px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.card button:hover {
     background-color: #0056b3;
 }
 
-/* 관리자 박스 스타일 */
-.admin-view .box {
-    background: #ffe8cc;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.admin-view .box:hover {
-    background: #ffd6a5;
+/* 관리자 전용 대시보드 스타일 */
+.admin-dashboard .card {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }
 
-/* 로그아웃 버튼 */
+.admin-dashboard .card h2 {
+    color: #856404;
+}
+
+/* 푸터 */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
 .logout-button {
-    display: inline-block;
-    margin-top: 20px;
     padding: 10px 15px;
     background-color: #dc3545;
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
     background-color: #c82333;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
 }

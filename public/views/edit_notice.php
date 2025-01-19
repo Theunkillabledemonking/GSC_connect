@@ -30,8 +30,8 @@ $stmt->close();
 
 // 공지사항 수정 처리
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = mysqli_real_escape_string($conn, $_POST['title']);
-    $content = mysqli_real_escape_string($conn, $_POST['content']);
+    $title = strip_tags($_POST['title']);
+    $content = strip_tags($_POST['content']);
 
     $updateQuery = "UPDATE notices SET title = ?, content = ? WHERE id = ?";
     $stmt = $conn->prepare($updateQuery);
