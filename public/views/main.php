@@ -28,7 +28,7 @@ $role = htmlspecialchars($_SESSION['role']);
         <div class="dashboard admin-dashboard">
             <div class="card">
                 <h2>전체 공지사항</h2>
-                <button onclick="navigateTo('./view_notices.php')">보기</button>
+                <button onclick="navigateTo('./view_notice.php')">보기</button>
             </div>
             <div class="card">
                 <h2>시간표</h2>
@@ -44,7 +44,7 @@ $role = htmlspecialchars($_SESSION['role']);
         <div class="dashboard student-dashboard">
             <div class="card">
                 <h2>전체 공지사항</h2>
-                <button onclick="navigateTo('./view_notices_user.php')">보기</button>
+                <button onclick="navigateTo('./view_notice_user.php')">보기</button>
             </div>
 
 

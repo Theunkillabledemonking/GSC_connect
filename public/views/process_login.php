@@ -16,6 +16,12 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
+    // 승인 여부 확인
+    if ($user['is_approved'] !== 'approved') {
+        echo "<script>alert('계정이 승인되지 않았습니다. 관리자에게 문의하세요.'); window.location.href='./main.php';</script>";
+        exit;
+    }
+
     // 비밀번호 검증
     if (password_verify($password, $user['password'])) {
         // 세션 저장
