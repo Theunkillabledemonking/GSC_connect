@@ -25,16 +25,18 @@ $notice = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($notice['title']); ?></title>
-    <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="../css/notices.css">
 </head>
 <body>
-    <h1><?php echo htmlspecialchars($notice['title']); ?></h1>
-    <p>작성자: <?php echo htmlspecialchars($notice['writer']); ?></p>
-    <p>대상: <?php echo htmlspecialchars($notice['target']); ?></p>
-    <p>작성일: <?php echo $notice['created_at']; ?></p>
-    <div class="content">
-        <?php echo nl2br(htmlspecialchars($notice['content'])); ?>
+    <div class="container">
+        <h1><?php echo htmlspecialchars($notice['title']); ?></h1>
+        <p>작성자: <?php echo htmlspecialchars($notice['writer']); ?></p>
+        <p>대상: <?php echo htmlspecialchars($notice['target']); ?></p>
+        <p>작성일: <?php echo $notice['created_at']; ?></p>
+        <div class="content">
+            <?php echo nl2br(htmlspecialchars($notice['content'])); ?>
+        </div>
+        <a href="./notices.php" class="btn">목록으로 돌아가기</a>
     </div>
-    <a href="./notices.php">목록으로 돌아가기</a>
 </body>
 </html>

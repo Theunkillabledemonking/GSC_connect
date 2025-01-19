@@ -24,7 +24,7 @@ include_once('../../includes/header.php');
     </form>
 
     <!-- 되돌아가기 버튼 -->
-    <a href="../main.html" class="back-button">돌아가기</a>
+    <a href="../main.php" class="back-button">돌아가기</a>
 </div>
 
 <?php include_once('../../includes/footer.php'); ?>

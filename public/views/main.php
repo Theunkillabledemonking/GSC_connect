@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['student_id'])) {
-    header("Location: ../main.php");
+    header("Location: ../index.php"); // 로그인 페이지로 이동
     exit();
 }
 
@@ -14,6 +14,7 @@ $role = htmlspecialchars($_SESSION['role']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GSC Portal - 메인 화면</title>
+    <!-- CSS 경로 -->
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -27,15 +28,15 @@ $role = htmlspecialchars($_SESSION['role']);
         <div class="dashboard admin-dashboard">
             <div class="card">
                 <h2>전체 공지사항</h2>
-                <button onclick="navigateTo('view_notices.php')">보기</button>
+                <button onclick="navigateTo('./view_notices.php')">보기</button>
             </div>
             <div class="card">
                 <h2>시간표</h2>
-                <button onclick="navigateTo('schedule.html')">보기</button>
+                <button onclick="navigateTo('./schedule.php')">보기</button>
             </div>
             <div class="card">
                 <h2>승인 관리</h2>
-                <button onclick="navigateTo('manage_users.php')">관리</button>
+                <button onclick="navigateTo('./manage_users.php')">관리</button>
             </div>
         </div>
         <?php else: ?>
@@ -43,15 +44,13 @@ $role = htmlspecialchars($_SESSION['role']);
         <div class="dashboard student-dashboard">
             <div class="card">
                 <h2>전체 공지사항</h2>
-                <button onclick="navigateTo('view_notices.php')">보기</button>
+                <button onclick="navigateTo('./view_notices_user.php')">보기</button>
             </div>
-            <div class="card">
-                <h2>학년별 공지사항</h2>
-                <button onclick="navigateTo('grade-notices.html')">보기</button>
-            </div>
+
+
             <div class="card">
                 <h2>시간표</h2>
-                <button onclick="navigateTo('schedule.html')">보기</button>
+                <button onclick="navigateTo('./schedule.php')">보기</button>
             </div>
         </div>
         <?php endif; ?>
