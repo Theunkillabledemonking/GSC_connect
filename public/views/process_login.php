@@ -1,6 +1,6 @@
 <?php
 // 데이터베이스 연결
-require_once('./includes/db.php');
+require_once(dirname(__DIR__, 2) . '/includes/db.php');
 
 // POST 요청 확인
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // 비밀번호가 틀렸을 경우
-            echo "<script>alert('비밀번호가 틀렸습니다.'); window.location.href='./login.php';</script>";
+            echo "<script>alert('비밀번호가 틀렸습니다.'); window.location.href='../index.php';</script>";
             exit;
         }
     } else {
         // 학번이 존재하지 않을 경우
-        echo "<script>alert('학번이 존재하지 않습니다.'); window.location.href='./login.php';</script>";
+        echo "<script>alert('학번이 존재하지 않습니다.'); window.location.href='../index.php';</script>";
         exit;
     }
 
