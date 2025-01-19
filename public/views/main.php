@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['student_id'])) {
-    header("Location: login.php");
+    header("Location: ../main.php");
     exit();
 }
 
@@ -14,7 +14,7 @@ $role = htmlspecialchars($_SESSION['role']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GSC Portal - 메인 화면</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
     <div class="container">

@@ -24,14 +24,14 @@ if ($result->num_rows > 0) {
         $_SESSION['role'] = $user['role'];
 
         // 메인 페이지로 이동
-        header("Location: main.php");
+        header("Location: ./main.php");
         exit();
     } else {
-        header("Location: login.php?error=invalid_password");
+        header("Location: ../main.php?error=invalid_password");
         exit();
     }
 } else {
-    header("Location: login.php?error=user_not_found");
+    header("Location: ../main.php?error=user_not_found");
     exit();
 }
 
