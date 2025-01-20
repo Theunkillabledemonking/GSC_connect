@@ -18,7 +18,7 @@ $result = $conn->query($query);
     <title>공지사항 관리</title>
 </head>
 <body>
-    <form method="post" action="admin_delete_notice.php">
+    <form method="post" action="./admin_delete_notice.php">
         <table>
             <thead>
                 <tr>

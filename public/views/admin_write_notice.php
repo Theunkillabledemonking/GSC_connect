@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>공지사항 작성</title>
 </head>
 <body>
-    <form method="post" action="admin_write_notice.php">
+    <form method="post" action="./admin_write_notice.php">
         <label for="title">제목:</label>
         <input type="text" id="title" name="title" required>
         <label for="target">대상:</label>

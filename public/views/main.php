@@ -5,6 +5,8 @@ if (!isset($_SESSION['student_id'])) {
     exit();
 }
 
+$_SESSION['grade'] = $user['grade']; // 로그인 시 학년 저장
+
 $name = htmlspecialchars($_SESSION['name']);
 $role = htmlspecialchars($_SESSION['role']);
 ?>
