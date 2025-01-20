@@ -28,6 +28,8 @@ if ($result->num_rows > 0) {
         $_SESSION['student_id'] = $user['student_id'];
         $_SESSION['name'] = $user['name'];
         $_SESSION['role'] = $user['role'];
+        var_dump($_SESSION); // 세션 변수 확인
+        exit;
 
         // 메인 페이지로 이동
         header("Location: ./main.php");
