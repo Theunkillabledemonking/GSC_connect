@@ -12,10 +12,10 @@ if (!isset($_SESSION['student_id'])) {
 var_dump($_SESSION);
 
 // // 학년 필터링
-// $target = isset($_SESSION['grade']) ? $_SESSION['grade'] : null; // 학년 정보 확인
-// if (!$target) {
-//     die("학년 정보가 없습니다. 관리자에게 문의하세요.");
-// }
+ $target = isset($_SESSION['grade']) ? $_SESSION['grade'] : null; // 학년 정보 확인
+ if (!$target) {
+     die("학년 정보가 없습니다. 관리자에게 문의하세요.");
+ }
 
 // SQL 쿼리 준비
 $query = $target === '전체'
