@@ -20,19 +20,22 @@ $result = $stmt->get_result();
 $notice = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $post_id = $_POST['post_id'];
     $title = $_POST['title'];
     $content = $_POST['content'];
-    $target = $_POST['target'];
+    $target = $_POST['target'] ?? '전체';
 
-    $update_query = "UPDATE notices SET title = ?, content = ?, target = ? WHERE id = ?";
-    $update_stmt = $conn->prepare($update_query);
-    $update_stmt->bind_param('sssi', $title, $content, $target, $id);
+    $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ?, target = ? WHERE id = ?");
+    $stmt->bind_param("sssi", $title, $content, $target, $post_id);
 
-    if ($update_stmt->execute()) {
-        echo "<script>alert('공지사항이 성공적으로 수정되었습니다.'); window.location.href='./admin_notices.php';</script>";
+    if ($stmt->execute()) {
+        echo "공지사항이 성공적으로 수정되었습니다.";
     } else {
-        echo "<script>alert('공지사항 수정에 실패했습니다.');</script>";
+        echo "수정 실패: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
 <!DOCTYPE html>
