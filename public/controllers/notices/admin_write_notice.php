@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'];
     $target = $_POST['target'];
 
-    $query = "INSERT INTO notices (title, writer, content, target) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO posts (title, writer, content, target) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ssss', $title, $writer, $content, $target);
 
