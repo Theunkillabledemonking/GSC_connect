@@ -25,7 +25,7 @@ $stmt->bind_param("isss", $user_id, $title, $content, $target);
 
 if ($stmt->execute()) {
     echo "공지사항이 성공적으로 등록되었습니다.";
-    header("Location: ./admin_notices.php?success=created");
+    header("Location: ./admin_notices.html?success=created");
     exit;
 } else {
     echo "데이터베이스 오류: " . $stmt->error;
