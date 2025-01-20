@@ -1,49 +1,66 @@
-/* 공통 스타일 */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+.notice-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
 }
 
-/* 테이블 스타일 */
-table {
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.filter-section select {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.notice-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
 
-table th, table td {
+.notice-table th, .notice-table td {
+    border: 1px solid #ddd;
     padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    text-align: center;
 }
 
-table th {
-    background-color: #007bff;
-    color: #fff;
-    font-weight: bold;
+.notice-table th {
+    background-color: #f4f4f4;
 }
 
-/* 버튼 스타일 */
-button {
-    background-color: #007bff;
-    color: white;
+.pagination {
+    margin-top: 10px;
+}
+
+.page-button {
+    padding: 5px 10px;
+    margin: 0 5px;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    background-color: #f0f0f0;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+.page-button:hover {
+    background-color: #ddd;
 }
 
-.alert {
-    color: red;
-    margin: 10px 0;
+#back-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#back-button:hover {
+    background-color: #e67e22;
 }

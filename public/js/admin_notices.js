@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <td><input type="checkbox" name="delete_ids[]" value="${notice.id}"></td>
                         <td>${notice.id}</td>
                         <td>${notice.title}</td>
+                        <td>${notice.writer}</td> <!-- 작성자 이름 추가 -->
                         <td>${notice.target}</td>
                         <td>${notice.created_at}</td>
                     </tr>
@@ -19,6 +20,41 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => console.error('Error fetching notices:', error));
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const targetFilter = document.getElementById('target-filter');
+    const noticesTable = document.getElementById('notices-table');
+
+    // 데이터 가져오기 함수
+    function fetchNotices(target = '전체') {
+        fetch(`../controllers/notices/admin_notices.php?target=${target}`)
+            .then(response => response.json())
+            .then(data => {
+                noticesTable.innerHTML = ''; // 테이블 초기화
+                data.forEach((notice, index) => {
+                    const row = `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${notice.target}</td>
+                            <td>${notice.title}</td>
+                            <td>${notice.created_at}</td>
+                        </tr>
+                    `;
+                    noticesTable.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching notices:', error));
+    }
+
+    // 필터 변경 시 공지사항 필터링
+    targetFilter.addEventListener('change', function () {
+        const target = targetFilter.value;
+        fetchNotices(target);
+    });
+
+    // 페이지 로드 시 전체 공지사항 로드
+    fetchNotices();
 });
 
 // 삭제 버튼 클릭 시 확인 메시지와 삭제 요청
