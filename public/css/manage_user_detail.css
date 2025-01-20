@@ -1,0 +1,37 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+form p {
+    margin: 10px 0;
+}
+
+label {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+}
+
+input, select {
+    padding: 5px;
+    width: 200px;
+}
+
+button {
+    margin: 10px;
+    padding: 8px 16px;
+    background-color: #ffa500;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #e67e22;
+}

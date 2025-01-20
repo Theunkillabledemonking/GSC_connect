@@ -38,7 +38,7 @@ $role = htmlspecialchars($_SESSION['role']);
             </div>
             <div class="card">
                 <h2>승인 관리</h2>
-                <button onclick="navigateTo('./manage_users.php')">관리</button>
+                <button onclick="navigateTo('./manage_users.html')">관리</button>
             </div>
         </div>
         <?php else: ?>
