@@ -111,7 +111,6 @@ $result = $stmt->get_result();
         }
         ?>
     </div>
-
     <button onclick="window.location.href='../main.php';">돌아가기</button>
 </body>
 </html>
