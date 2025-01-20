@@ -1,11 +1,20 @@
 <?php
-// 데이터베이스 연결
 session_start();
 require_once(dirname(__DIR__, 2) . '/includes/db.php');
 
+function redirectWithError($url, $error) {
+    header("Location: $url?error=$error");
+    exit();
+}
+
 // POST 요청 데이터 가져오기
-$student_id = trim($_POST['student_id']);
-$password = trim($_POST['password']);
+$student_id = trim($_POST['student_id'] ?? '');
+$password = trim($_POST['password'] ?? '');
+
+// 입력 값 검증
+if (empty($student_id) || empty($password)) {
+    redirectWithError('../main.php', 'empty_fields');
+}
 
 // 데이터베이스에서 사용자 정보 확인
 $stmt = $conn->prepare("SELECT * FROM users WHERE student_id = ?");
@@ -18,8 +27,7 @@ if ($result->num_rows > 0) {
 
     // 승인 여부 확인
     if ($user['is_approved'] !== 'approved') {
-        echo "<script>alert('계정이 승인되지 않았습니다. 관리자에게 문의하세요.'); window.location.href='./main.php';</script>";
-        exit;
+        redirectWithError('../main.php', 'account_not_approved');
     }
 
     // 비밀번호 검증
@@ -33,12 +41,10 @@ if ($result->num_rows > 0) {
         header("Location: ./main.php");
         exit();
     } else {
-        header("Location: ../main.php?error=invalid_password");
-        exit();
+        redirectWithError('../main.php', 'invalid_password');
     }
 } else {
-    header("Location: ../main.php?error=user_not_found");
-    exit();
+    redirectWithError('../main.php', 'user_not_found');
 }
 
 $stmt->close();
