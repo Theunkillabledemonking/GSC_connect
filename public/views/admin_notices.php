@@ -2,23 +2,29 @@
 session_start();
 require_once(dirname(__DIR__, 2) . '/includes/db.php');
 
-// 로그인 검증 (관리자 권한 확인)
+// 관리자 권한 확인
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("권한이 없습니다.");
 }
 
-$query = "SELECT * FROM notices ORDER BY created_at DESC";
+// 공지사항 목록 가져오기
+$query = "SELECT * FROM posts ORDER BY created_at DESC";
 $result = $conn->query($query);
 ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항 관리</title>
+    <script>
+        function confirmDelete() {
+            return confirm('선택한 공지사항을 삭제하시겠습니까?');
+        }
+    </script>
 </head>
 <body>
-    <form method="post" action="./admin_delete_notice.php">
+    <h1>공지사항 관리</h1>
+    <form method="post" action="./admin_delete_notice.php" onsubmit="return confirmDelete();">
         <table>
             <thead>
                 <tr>
@@ -43,5 +49,6 @@ $result = $conn->query($query);
         </table>
         <button type="submit">삭제하기</button>
     </form>
+    <button onclick="window.location.href='./admin_write_notice.php';">공지사항 작성</button>
 </body>
 </html>
