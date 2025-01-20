@@ -1,6 +1,6 @@
 // 페이지 로드 시 공지사항 데이터 가져오기
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('../controllers/noties/admin_notices.php')
+    fetch('../controllers/notices/admin_notices.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('notices-table');
