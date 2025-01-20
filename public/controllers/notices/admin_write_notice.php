@@ -4,7 +4,7 @@ require_once(dirname(__DIR__, 3) . '/includes/db.php');
 
 // 세션 유효성 확인
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /login.php?error=session_expired");
+    header("Location: ../../main.php?error=session_expired");
     exit;
 }
 
