@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(dirname(__DIR__, 2) . '/includes/db.php');
+require_once(dirname(__DIR__, 3) . '/includes/db.php');
 
 // 관리자 권한 확인
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {

@@ -1,14 +1,13 @@
 <?php
 session_start();
+// 데이터베이스 연결
+require_once(dirname(__DIR__, 3) . '/includes/db.php');
 
 // 관리자 권한 확인
 if ($_SESSION['role'] !== 'admin') {
     header("Location: ./main.php");
     exit;
 }
-
-// 데이터베이스 연결
-require_once('./includes/db.php');
 
 // POST 요청 처리 (승인/거부)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
