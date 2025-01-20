@@ -26,9 +26,11 @@
         <table class="notice-table">
             <thead>
                 <tr>
+                    <th>선택</th>
                     <th>번호</th>
-                    <th>대상</th>
                     <th>제목</th>
+                    <th>작성자</th>
+                    <th>대상</th>
                     <th>작성일</th>
                 </tr>
             </thead>
@@ -42,10 +44,11 @@
             <button class="page-button" data-page="1">1</button>
             <button class="page-button" data-page="2">2</button>
             <button class="page-button" data-page="3">3</button>
-            <!-- 추가 페이지 번호 버튼 -->
+            <!-- 필요 시 추가 버튼 생성 -->
         </div>
+
         <button id="back-button" onclick="window.location.href='./admin_write_notice.html';">글쓰기</button>
-        <button onclick="window.location.href='../main.php';">돌아가기</button>
+        <button onclick="window.location.href='./main.php';">돌아가기</button>
     </div>
 </body>
 </html>

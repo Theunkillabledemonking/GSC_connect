@@ -37,12 +37,13 @@ h1 {
 }
 
 .pagination {
+    text-align: center;
     margin-top: 10px;
 }
 
 .page-button {
-    display: block;
-    margin: 10px auto;
+    display: inline-block;
+    margin: 5px;
     padding: 10px 20px;
     background-color: #ffa500;
     border: none;
@@ -53,7 +54,7 @@ h1 {
 }
 
 .page-button:hover {
-    background-color: #ddd;
+    background-color: black; /* Hover 시 흰색 배경이면 글자색을 고민해야 함 */
 }
 
 #back-button {

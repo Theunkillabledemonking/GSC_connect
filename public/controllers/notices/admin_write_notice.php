@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// 세션에서 작성자 정보 가져오기
 $user_id = $_SESSION['user_id'];
 $title = trim($_POST['title']);
 $content = trim($_POST['content']);
@@ -20,7 +19,7 @@ if (empty($title) || empty($content)) {
     exit;
 }
 
-// 데이터베이스 삽입 (작성자 ID만 저장)
+// 데이터베이스 삽입
 $stmt = $conn->prepare("INSERT INTO posts (user_id, title, content, target, created_at) VALUES (?, ?, ?, ?, NOW())");
 $stmt->bind_param("isss", $user_id, $title, $content, $target);
 
