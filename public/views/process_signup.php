@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param('sssssss', $student_id, $name, $email, $hashed_password, $phone, $role, $is_approved);
 
     if ($stmt->execute()) {
-        header("Location: ../login.php?success=signup_success");
+        header("Location: ../main.php?success=signup_success");
     } else {
         echo "회원가입 실패: " . $stmt->error;
     }
