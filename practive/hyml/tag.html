@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15;
+        }
+    </style>
+</head>
+<body>
+    <h2>순서없는 목록 (Unordered List)</h2>
+    <ul>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ul>
+    <h2>순서있는 목록 (Ordered List)</h2>
+    <ol>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ol>
+
+    <ol type="I">
+        <li value="2">Coffee</li>
+        <li value="4">Tea</li>
+        <li>Milk</li>
+    </ol>
+
+    <ol start="3">
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ol>
+
+    <ol reversed>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ol>
+
+    <table border="6">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <th>Jill</th>
+            <th>Smith</th>
+            <th>50</th>
+        </tr>
+        <tr>
+            <th>Eve</th>
+            <th>Jackson</th>
+            <th>94</th>
+        </tr>
+        <tr>
+            <th>John</th>
+            <th>Doe</th>
+            <th>80</th>
+        </tr>
+    </table>
+
+    <h2>2개의 culumn을 span</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th colspan="2">Telephone</th>
+        </tr>
+        <tr>
+            <td>Bill Gates</td>
+            <td>555 77 854</td>
+            <td>555 77 855</td>
+        </tr>
+    </table>
+
+    <h2>2개의 row를 span</h2>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>Bill Gates</td>
+        </tr>
+        <tr>
+            <th rowspan="2">Telephone</th>
+            <td>555 77 854</td>
+        </tr>
+        <tr>
+            <td>555 77 855</td>
+        </tr>
+        
+    </table>
+</body>
+</html>
