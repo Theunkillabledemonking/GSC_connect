@@ -27,6 +27,10 @@ if (isset($_GET['id'])){
         echo "<hr>";
         echo "<p>" . nl2br(htmlspecialchars($content)) . "</p>";
 
+        // 수정하기 링크 추가
+        echo "<p><a href='edit_post.php?id=$post_id'>수정하기</a></p>";
+        echo "<p><a href='posts.php?id=$post_id'>돌아가기</a></p>";
+
         // 이전 게시물 조회
         $prev_stmt = $conn->prepare("SELECT id FROM posts WHERE id < ? ORDER BY id DESC LIMIT 1");
         $prev_stmt->bind_param("i", $post_id);

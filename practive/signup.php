@@ -10,7 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ss", $username, $password);
 
     if ($stmt->execute()) {
-        echo "회원가입 성공!";
+        echo "<script>
+            alert('회원가입 성공!');
+            window.location.href = 'login.php';
+        </script>";
+            exit();
     } else {
         echo "회원가입 실패:" . $conn->error;
     }
@@ -23,4 +27,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="text" name="username" placeholder="아이디" require>
     <input type="password" name="password" placeholder="비밀번호" require>
     <button type="submit">회원가입</button>
+    <button type="button" value="button" onclick="location.href='login.php'">돌아가기</button>
 </form>

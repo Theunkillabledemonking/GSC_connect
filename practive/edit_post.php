@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
     $post_id = intval($_GET['id']); 
 
     // 게시물 데이터 조회
-    $stmt = $conn->prepare("SELECT title, contetnt FROM posts WHERE id = ?");
+    $stmt = $conn->prepare("SELECT title, content FROM posts WHERE id = ?");
     $stmt->bind_param("i", $post_id);
     $stmt->execute();
     $stmt->bind_result($title, $content);
@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
             <form action="edit_post.php" method="post">
             <input type="hidden" name="id" value="<?= htmlspecialchars($post_id) ?>">
                 <label for="title">제목:</label>
-                <input type="text" id="title" name="title" value="<?= htmlspecialchars($title) ?>" required><br><br>
+                <input type="text" id="title" name="title" value="<?= htmlspecialchars($title)?>" required><br><br>
                 <label for="content">내용:</label><br>
                 <textarea id="content" name="content" rows="10" cols="50" required><?= htmlspecialchars($content) ?></textarea><br><br>
                 <button type="submit">수정하기</button>
@@ -49,7 +49,7 @@ if (isset($_GET['id'])) {
     $content = $_POST['content'];
 
     // 데이터베이스 업데이트
-    $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ?, WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ?");
     $stmt->bind_param("ssi", $title, $content, $post_id);
 
     if ($stmt->execute()) {
@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
     } else {
         echo "수정에 실패했습니다.";
     }
-    $stmt->clone();
+    $stmt->close();
 }
 
 $conn->close();

@@ -15,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->fetch() && password_verify($password, $hased_password)) {
         $_SESSION['user_id'] = $id;
         echo "로그인 성공!";
+        // 게시판 이동
+        header("Location: posts.php");
+        exit();
     } else {
         echo "로그인 실패: 아이디 또는 비밀번호를 확인하세요.";
     }
@@ -35,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="username" placeholder="아이디" require>
         <input type="password" name="password" placeholder="비밀번호" require>
         <button type="submit">로그인</button>
+        <button type="button" value="button" onclick="location.href='signup.php'">회원가입</button>
     </form>
 </body>
 </html>
