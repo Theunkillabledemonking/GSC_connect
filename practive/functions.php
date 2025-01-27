@@ -8,28 +8,19 @@ function db_connect() {
 }
 
 function get_posts($conn, $offset, $posts_per_page, $keyword = '%', $filter = 'title') {
+    $base_sql = "SELECT posts.id, posts.title, posts.content, posts.created_at, users.username
+                 FROM posts
+                 JOIN users ON posts.user_id = users.id";
+    
     if ($filter === 'title') {
-        $sql = "SELECT posts.id, posts.title, posts.content, posts.created_at, users.username
-                FROM posts
-                JOIN users ON posts.user_id = users.id
-                WHERE posts.title LIKE ?
-                ORDER BY posts.created_at DESC
-                LIMIT ? OFFSET ?";
+        $where_sql = "WHERE posts.title LIKE ?";
     } elseif ($filter === 'username') {
-        $sql = "SELECT posts.id, posts.title, posts.content, posts.created_at, users.username
-                FROM posts
-                JOIN users ON posts.user_id = users.id
-                WHERE users.username LIKE ?
-                ORDER BY posts.created_at DESC
-                LIMIT ? OFFSET ?";
+        $where_sql = "WHERE users.username LIKE ?";
     } else {
-        // 기본 동작: 필터가 없으면 전체 게시물을 가져옴
-        $sql = "SELECT posts.id, posts.title, posts.content, posts.created_at, users.username
-                FROM posts
-                JOIN users ON posts.user_id = users.id
-                ORDER BY posts.created_at DESC
-                LIMIT ? OFFSET ?";
+        $where_sql = ""; // 필터가 없으면 조건 없음
     }
+
+    $sql = "$base_sql $where_sql ORDER BY posts.created_at DESC LIMIT ? OFFSET ?";
 
     $stmt = $conn->prepare($sql);
 
@@ -44,18 +35,17 @@ function get_posts($conn, $offset, $posts_per_page, $keyword = '%', $filter = 't
 }
 
 function get_total_posts($conn, $keyword = '%', $filter = 'title') {
+    $base_sql = "SELECT COUNT(*) AS total FROM posts";
+    
     if ($filter === 'title') {
-        $sql = "SELECT COUNT(*) AS total FROM posts WHERE title LIKE ?";
+        $where_sql = "WHERE title LIKE ?";
     } elseif ($filter === 'username') {
-        $sql = "SELECT COUNT(*) AS total
-                FROM posts
-                JOIN users ON posts.user_id = users.id
-                WHERE users.username LIKE ?";
+        $where_sql = "JOIN users ON posts.user_id = users.id WHERE users.username LIKE ?";
     } else {
-        // 기본 동작: 필터가 없으면 전체 게시물 수를 계산
-        $sql = "SELECT COUNT(*) AS total FROM posts";
+        $where_sql = ""; // 필터가 없으면 조건 없음
     }
-
+    
+    $sql = "$base_sql $where_sql";
     $stmt = $conn->prepare($sql);
 
     if ($filter === 'title' || $filter === 'username') {
