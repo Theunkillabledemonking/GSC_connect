@@ -13,7 +13,7 @@ $keyword = '%' . ($_GET['keyword'] ?? '') . '%';
 $filter = $_GET['filter'] ?? 'title';
 
 // 페이지네이션 계산
-$posts_per_page = 10; // 한 페이지에 표시할 게시물 수
+$posts_per_page = 5; // 한 페이지에 표시할 게시물 수
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = ($page - 1) * $posts_per_page;
 
