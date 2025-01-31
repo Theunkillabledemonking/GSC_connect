@@ -1,12 +1,26 @@
 <?php
+session_start();
 require 'auth.php';
 require 'functions.php';
 
 // DB 연결
 $conn = db_connect();
 
+// 디버깅 코드 추가
+echo "<pre>";
+print_r($_SESSION); // 세션 배열 전체를 출력
+echo "</pre>";
+echo "<pre>";
+echo "Session user_id: " . ($_SESSION['user_id'] ?? 'Not Set') . "\n";
+echo "Session role: " . ($_SESSION['role'] ?? 'Not Set') . "\n";
+echo "</pre>";
+
+// session_start (); // 세션 시작
+$role = $_SESSION['role'] ?? ''; // 사용자 역할 확인
+$user_id = $_SESSION['user_id'] ?? ''; // 사용자 id 확인
+
 // 로그인 상태 확인
-$user_id = authenticate_user($conn); // 세션 또는 쿠키를 통해 인증 확인
+authenticate_user($conn); // 세션 또는 쿠키를 통해 인증 확인
 
 // 검색 조건 설정
 $keyword = '%' . ($_GET['keyword'] ?? '') . '%';
@@ -17,11 +31,22 @@ $posts_per_page = 5; // 한 페이지에 표시할 게시물 수
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = ($page - 1) * $posts_per_page;
 
-// 게시물 가져오기 (검색 조건 및 페이징 적용)
-$posts = get_posts($conn, $offset, $posts_per_page, $keyword, $filter);
+// 게시물 가져오기 (권한별로 조건 설정)
+if ($role === 'admin') {
+    // 관리자: 모든 게시물 조회
+    $posts = get_posts($conn, $offset, $posts_per_page, $keyword, $filter); // 관리자: 모든 게시물
+} else {
+    $posts = get_posts($conn, $offset, $posts_per_page, $keyword, $filter);  // 교수 & 학생 : 교수들의 게시물
+}
 
-// 전체 게시물 수 가져오기 (검색 조건 적용)
-$total_posts = get_total_posts($conn, $keyword, $filter);
+// 전체 게시물 수 가져오기 (권한별로 조건 적용)
+if ($role === 'admin') {
+    $total_posts = get_total_posts($conn, $keyword, $filter);
+} else {
+    $total_posts = get_total_posts($conn, $keyword, $filter);
+}
+
+// 전체 페이지 나누기
 $total_pages = ceil($total_posts / $posts_per_page);
 ?>
 
@@ -46,7 +71,9 @@ $total_pages = ceil($total_posts / $posts_per_page);
                 <th>제목</th>
                 <th>작성자</th>
                 <th>작성일</th>
-                <th>삭제</th>
+                <?php if ($role === 'admin' || $role === 'professor'): ?>
+                    <th>삭제</th>
+                <?php endif; ?>
             </tr>
         </thead>
         
@@ -59,7 +86,11 @@ $total_pages = ceil($total_posts / $posts_per_page);
                         <td><a href="post_detail.php?id=<?= $row['id'] ?>"><?= htmlspecialchars($row['title']) ?></a></td>
                         <td><?= htmlspecialchars($row['username']) ?></td>
                         <td><?= $row['created_at'] ?></td>
-                        <td><a href="delete_post.php?id=<?= $row['id'] ?>" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></td>
+                        <?php if ($role === 'admin' || ($role === 'professor' && $row['user_id'] == $_SESSION['user_id'])) : ?>
+                            <td><a href="delete_post.php?id=<?= $row['id'] ?>" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a></td>
+                        <?php else: ?>
+                            <td></td> <!-- 빈 칸 -->
+                        <?php endif; ?>
                     </tr>
                 <?php endwhile; ?>
             <?php else: ?>
@@ -85,12 +116,15 @@ $total_pages = ceil($total_posts / $posts_per_page);
             <?php if ($i == $page): ?>
                 <strong><?= $i ?></strong>
             <?php else: ?>
-                <a href="list.php?page=<?= $i ?>&keyword=<?= urlencode($_GET['keyword'] ?? '') ?>&filter=<?= urlencode($_GET['filter'] ?? 'title') ?>"><?= $i ?></a>
+                <a href="posts.php?page=<?= $i ?>&keyword=<?= urlencode($_GET['keyword'] ?? '') ?>&filter=<?= urlencode($_GET['filter'] ?? 'title') ?>"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
     </div>
-
-    <p><a href='create_posts.html'>글쓰기</a></p>
+    
+    <!-- 글쓰기 버튼 -->
+    <?php if ($role === 'admin' || $role === 'professor'): ?>
+        <p><a href='create_posts.html'>글쓰기</a></p>
+    <?php endif; ?>
 </body>
 </html>
 <?php $conn->close(); ?>
