@@ -1,23 +1,30 @@
 <?php
+session_start(); // 세션 시작
+require 'auth.php';
+
 // MySQL 연결
 $conn = new mysqli('localhost', 'root', '', 'school_portal');
 if ($conn->connect_error) {
-    die("DB 연결 실패: ". $conn->connect_error);
+    die("DB 연결 실패: " . $conn->connect_error);
 }
+
+// 현재 로그인한 사용자 정보 가져오기
+$role = $_SESSION['role'] ?? '';
+$user_id = $_SESSION['user_id'] ?? '';
 
 // GET 요청으로 게시물 ID 받기
 if (isset($_GET['id'])){
     $post_id = intval($_GET['id']); // ID를 정수형으로 변환하여 안전하게 처리
 
     // 게시물 조회 쿼리
-    $stmt = $conn->prepare("SELECT posts.title, posts.content, posts.created_at, users.username
+    $stmt = $conn->prepare("SELECT posts.title, posts.content, posts.created_at, posts.user_id, users.username
                             FROM posts
                             JOIN users ON posts.user_id = user_id
                             WHERE posts.id = ?");
     $stmt->bind_param("i", $post_id);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($title, $content, $created_at, $username);
+    $stmt->bind_result($title, $content, $created_at, $post_user_id, $username);
 
     if ($stmt->fetch()) {
         // 게시물 데이터 출력
@@ -27,8 +34,10 @@ if (isset($_GET['id'])){
         echo "<hr>";
         echo "<p>" . nl2br(htmlspecialchars($content)) . "</p>";
 
-        // 수정하기 링크 추가
-        echo "<p><a href='edit_post.php?id=$post_id'>수정하기</a></p>";
+        // 수정 버튼 (관리자: 모든 글 수정 가능 / 교수: 자기 글만 수정 가능)
+        if ($role === 'admin' || ($role === 'professor' && $user_id === $post_user_id)) {
+            echo "<p><a href='edit_post.php?id=$post_id'>수정하기</a></p>";
+        }
         echo "<p><a href='posts.php?id=$post_id'>돌아가기</a></p>";
 
         // 이전 게시물 조회
