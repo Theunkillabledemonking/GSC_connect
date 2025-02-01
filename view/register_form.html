@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <script src = "../js/register.js" defer></script> <!-- 분리된 JS 파일 포함 -->
+    <script src="../js/register.js" defer></script> <!-- 분리된 JS 파일 포함 -->
 </head>
 <body>
     <!-- 회원가입 폼 -->
     <h1>회원가입</h1>
-    <form action="../controller/register.php" method="POST">
+    <form action="../controller/register.php" method="POST" id="register_form">
         <!-- 학번 입력 필드 -->
         <label for="student_id">학번:</label>
         <input type="text" id="student_id" name="student_id" required>
