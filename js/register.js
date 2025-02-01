@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // 폼 제출 이벤트 리스너 추가
     registerForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // 기본 폼 제출 차단 (맨 처음에 호출)
+
         // 사용자가 입력한 비밀번호 가져오기
         const password = document.getElementById("password").value;
 
