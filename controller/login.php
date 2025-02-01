@@ -5,7 +5,7 @@ session_start(); // 세션 시작
 // 요청 메서드가 POST인지 확인인
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 사용자 입력 데이터 가져오기
-    $student_id = $_POST['stdent_id']; // 학번
+    $student_id = $_POST['student_id']; // 학번
     $password = $_POST['password'];    // 비밀번호
 
     // User 모델의 authenticate 함수 호출 (로그인 인증)
