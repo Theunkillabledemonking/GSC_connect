@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // 회원가입 폼 요소 가져오기
     const registerForm = document.getElementById("registerForm");
 
+    // 폼이 제대로 선택되지 않을 경우 경고 메시지 출력
+    if (!registerForm) {
+        console.error("❌ registerForm을 찾을 수 없습니다.");
+        return;
+    }
     // 폼 제출 이벤트 리스너 추가
     registerForm.addEventListener("submit", (event) => {
         // 사용자가 입력한 비밀번호 가져오기
