@@ -1,5 +1,6 @@
 <?php
 require_once '../config/config.php'; // 데이터베이스 연결 파일
+require_once '../model/User.php'; // User 모델 포함
 
 // 요청 메서드가 POST인지 확인인
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
