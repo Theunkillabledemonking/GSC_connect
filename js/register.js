@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("❌ registerForm을 찾을 수 없습니다.");
         return;
     }
+
     // 폼 제출 이벤트 리스너 추가
     registerForm.addEventListener("submit", (event) => {
-        event.preventDefault(); // 기본 폼 제출 차단 (맨 처음에 호출)
+        event.preventDefault(); // 기본 폼 제출 차단
 
         // 사용자가 입력한 비밀번호 가져오기
         const password = document.getElementById("password").value;
@@ -25,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // 비밀번호 일치 여부 확인
         if (password !== confirmPassword) {
             alert("비밀번호가 일치하지 않습니다.") // 사용자 경고
-            event.preventDefault(); // 폼 제출 차단
+        } else {
+            console.log("✅ 비밀번호가 일치합니다! 폼 제출을 진행합니다.");
+            registerForm.submit(); // 비밀번호가 일치할 경우 폼 제출
         }
     });
 });
