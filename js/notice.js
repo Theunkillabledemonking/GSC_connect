@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // HTML 요소 선택
     const noticeList = document.getElementById("noticeList"); // 공지사항 목록을 표시한 div
     const searchInput = document.getElementById("searchInput"); // 검색 입력 필드
+    const searchOption = document.getElementById("searchOption"); // 검색 옵션
     const searchBtn = document.getElementById("searchBtn"); // 검색 버튼
     const prevPageBtn = document.getElementById("prevPage"); // 이전 페이지 버튼
     const nextPageBtn = document.getElementById("nextPage"); // 다음 페이지 버튼
@@ -65,7 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     searchBtn.addEventListener("click", () => {
         const searchValue = searchInput.value.trim(); // 입력된 검색어 앞뒤 공백 제거
-        loadNotices(searchValue, 1); // 첫 페이지부터 검색 결과 출력
+        const searchBy = searchOption.value; // 선택된 검색 옵션션
+        loadNotices(searchValue, searchBy, 1); // 첫 페이지부터 검색 결과 출력
     });
 
     /**
@@ -74,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     prevPageBtn.addEventListener("click", () => {
         if (currentPage > 1) {
-            loadNotices(searchInput.value.trim(), currentPage - 1);
+            loadNotices(searchInput.value.trim(), searchOption.value, currentPage - 1);
         }
     });
 
@@ -84,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     nextPageBtn.addEventListener("click", () => {
         if (currentPage < totalPages) {
-            loadNotices(searchInput.value.trim(), currentPage + 1);
+            loadNotices(searchInput.value.trim(), searchOption.value, currentPage + 1);
         }
     });
 
