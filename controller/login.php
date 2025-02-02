@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_name'] = $user['name'];  // 사용자 이름
 
         // 대시보드 페이지로 리다이렉트
-        header("Location: ../view/dashboard.html");
+        header("Location: ../view/notice_list.html");
         exit;
     } else {
         // 로그인 실패 메시지 출력

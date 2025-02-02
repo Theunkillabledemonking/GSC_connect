@@ -139,7 +139,7 @@ class Notice {
      * @param int $limit 한 페이지당 표시할 개수
      * @return array 공지사항 목록 및 총 페이지 수 반환
      */
-    public static function getAll($search = null, $page = 1, $limit = 10) {
+    public static function getAll($search = null, $option = 'title', $page = 1, $limit = 10) {
         $conn = connect_db(); // 데이터베이스 연결
 
         // 페이지네이션을 위한 OFFSET 계산 (0부터 시작)
@@ -148,6 +148,9 @@ class Notice {
         // 검색어가 입력된 경우,, SQL 'LIKE' 연산을 사용하기 위해 % 추가
         // 검색어가 없으면 기본값 "%"를 사용해 모든 데이터 조회
         $search = isset($search) ? "%".$search."%" : "%";
+
+        // 검색 옵션에 따라 WHERE 조건 다르게 설정
+        $whereClause = $option === 'author' ? "users.name LIKE ?" : "notices.title LIKE ?";
 
         /**
          * 공지사항 목록을 조회하는 SQL 쿼리
@@ -159,12 +162,12 @@ class Notice {
         $sql = "SELECT notices.id, notices.title, notices.content, notices.created_at, users.name AS author_name
                 FROM notices
                 JOIN users ON notices.author_id = users.id
-                WHERE notices.title LIKE ? OR users.name LIKE ?
+                WHERE $whereClause
                 ORDER BY notices.created_at DESC 
                 LIMIT ? OFFSET ?";
 
         $stmt = $conn->prepare($sql); // sql 준비비
-        $stmt->bind_param("ssii", $search, $search, $limit, $offset); // 파라미터 바인딩딩
+        $stmt->bind_param("sii", $search, $limit, $offset); // 파라미터 바인딩딩
         $stmt->execute(); // 쿼리 실행
         $result = $stmt->get_result(); // 실행 결과 가져오기
 
@@ -181,10 +184,10 @@ class Notice {
          */
         $count_sql = "SELECT COUNT(*) AS total FROM notices
                       JOIN users ON notices.author_id = users.id
-                      WHERE notices.title LIKE ? OR users.name LIKE ?";
+                      WHERE $whereClause";
 
         $count_stmt = $conn->prepare($count_sql); // SQL 준비
-        $count_stmt->bind_param("ss", $search, $search); // 파라미터 바인딩
+        $count_stmt->bind_param("s", $search); // 파라미터 바인딩
         $count_stmt ->execute(); // 쿼리 실행
         $count_result = $count_stmt->get_result(); // 실행 결과 가져오기
         $total_rows = $count_result->fetch_assoc()['total']; // 전체 게시물 개수 가져오기

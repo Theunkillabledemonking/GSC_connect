@@ -30,4 +30,5 @@ document.addEventListener("DOMContentLoaded", () => {
         // 7. 폼 제출 (검증 통과 시)
         loginForm.submit();
     });
+    
 });
