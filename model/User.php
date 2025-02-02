@@ -25,7 +25,7 @@ class User {
     }
 
     // 사용자 인증 (로그인) 처리 함수
-    public static function authenticate($student_id, $password) {
+    public static function getUserByID($student_id, $password) {
         $conn = connect_db(); // 데이터베이스 연결
 
         // 학번으로 사용자 정보 조회
@@ -33,25 +33,14 @@ class User {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $student_id);
         $stmt->execute();
-        $stmt->bind_result($id, $name, $role, $hashed_password);
-
-        // 결과가 존재하고 비밀번호가 일치하는지 확인
-        if ($stmt->fetch()) {
-            // 비밀번호 검증
-            if (password_verify($password, $hashed_password)) {
-                $stmt->close();
-                $conn->close();
-                return [
-                    'id' => $id,
-                    'name' => $name,
-                    'role' => $role
-                ]; // 인증 성공
-            }
-        }
+        
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc(); // 연관 배열로 사용자 정보  가져오기
 
         $stmt->close();
         $conn->close();
-        return false; // 인증 실패
+
+        return $user; // 사용자 정보 배열 반환
     }
 }
 ?>

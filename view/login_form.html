@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
+    <script src="../js/login.js" defer></script> <!-- js 파일 분리 -->
 </head>
 <body>
     <h1>로그인</h1>
 
     <!-- login form -->
-    <form action="../controller/login.php" method="POST">
+    <form action="../controller/login.php" method="POST" id="loginForm">
         <!-- 학번 입력 필드 -->
         <label for="student_id">학번: </label>
         <input type="text" id="student_id" name="student_id" required>

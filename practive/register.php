@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     // 비밀번호 확인
     $confirm_password = $_POST['confirm_password'];
-     
 
     // ======================================
     //  비밀번호 확인 (두 값이 같은지 체크)

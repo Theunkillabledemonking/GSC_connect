@@ -46,6 +46,27 @@ Class User {
         return false;
         }
     }
+
+    // 학번으로 사용자 정보 조회
+    public static function getUserByID($student_id) {
+        //  데이터 베이스 연결
+        $conn = db_connect();
+        // 사용자 데이터를 찾는 SQL 쿼리
+        $sql = "SELECT * FROM users WHERE student_id = ?";
+        // SQL 실행 문을 위한 준비
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $student_id);
+        $stmt->execute();
+        
+        // 연관 배열 데이터 가져오기
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        // 쿼리 & SQL 종료료
+        $stmt->close();
+        $conn-> close();
+
+        return $user; // 사용자 정보 배열 반환
+    }
 }
 
 ?>
