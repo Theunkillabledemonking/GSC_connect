@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <script src="../js/notice.js"></script>
+</head>
+<body>
+    <h1>공지사항</h1>
+
+    <!-- 검색 폼-->
+    <input type="text" id="searchInput" placeholder="작성자 또는 제목 검색">
+    <button id="searchBtn">검색</button>
+
+    <!-- 게시판 목록 -->
+    <div id="noticeList"></div>
+
+    <!-- 페이지네이션-->
+    <div id="pagination">
+        <button id="prevPage">이전</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage">다음</button>
+    </div>
+</body>
+</html>
