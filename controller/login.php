@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];    // 비밀번호
 
     // DB에서 사용자 정보 조회 
-    $user = User::getUserByID($student_id, $password);
+    $user = User::getUserById($student_id, $password);
 
     // 비밀번호 검증 및 로그인 처리
     if ($user && password_verify($password, $user['password'])) {
@@ -18,11 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['role'] = $user['role'];  // 사용자 역할 
         $_SESSION['user_name'] = $user['name'];  // 사용자 이름
 
-        // 대시보드 페이지로 리다이렉트트
+        // 대시보드 페이지로 리다이렉트
         header("Location: ../view/dashboard.html");
+        exit;
     } else {
         // 로그인 실패 메시지 출력
-        echo "로그인 실패: 잘못된 id 또는 password";
+        echo "<scrtip>alert('학번 또는 비밀번호가 잘못되었습니다.'); window.history.back();</script>";
+        exit;
     }
 }
 ?>

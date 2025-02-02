@@ -15,13 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 5. 입력된 값 가져오기
         const studentId = document.getElementById("student_id").value.trim();
-        const password = document.getElementById("password").value.tirm();
+        const password = document.getElementById("password").value.trim();
 
         // 6. 입력값 검증
-        if (studentId == "") {
-            alert("학번을 입력하세요;");
+        if (studentId === "") {
+            alert("학번을 입력하세요.");
             return;
-        } else if (password == "") {
+        }  
+        if (password === "") {
             alert("비밀번호를 입력하세요.");
             return;
         }

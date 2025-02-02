@@ -25,7 +25,7 @@ class User {
     }
 
     // 사용자 인증 (로그인) 처리 함수
-    public static function getUserByID($student_id, $password) {
+    public static function getUserById($student_id) {
         $conn = connect_db(); // 데이터베이스 연결
 
         // 학번으로 사용자 정보 조회
@@ -35,7 +35,7 @@ class User {
         $stmt->execute();
         
         $result = $stmt->get_result();
-        $user = $result->fetch_assoc(); // 연관 배열로 사용자 정보  가져오기
+        $user = $result->fetch_assoc(); // 연관 배열로 사용자 정보 가져오기
 
         $stmt->close();
         $conn->close();
