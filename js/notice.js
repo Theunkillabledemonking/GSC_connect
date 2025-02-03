@@ -38,6 +38,26 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => {console.error("권한 정보 로드 실패:", error)});
 
     /**
+     * 사용자 권한 확인 및 글쓰기 버튼 표시
+     */
+    fetch('../controller/user_role.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("사용자 권한 정보를 가져올 수 없습니다.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("받은 사용자 데이터:", data); // 디버깅용
+            if (data.role === 'admin' || data.role === 'admin') {
+                writeBtn.style.display = "inline-block"; // 관리자/교수인 경우 글쓰기 버튼 표시
+            } else {
+                console.log("사용자 권한이 부족하여 글쓰기 버튼이 표시되지 않습니다.");
+            }
+        })
+        .catch(error => {console.error("권한 정보 로드 실패:", error)});
+
+    /**
      * 공지사항 목록 불러오기
      * - 검색어와 페이지 번호를 매개변수로 받아 해당 데이터를 서버에서 가져옴
      * - 검색어가 없으면 전체 게시물을 불러옴
