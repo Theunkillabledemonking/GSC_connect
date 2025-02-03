@@ -9,6 +9,11 @@ if (!isset($_SESSION['role'])) {
     exit;
 }
 
+// ✅ 세션 값 확인을 위한 디버깅 추가
+error_log("User Role Debug - user_id: " . ($_SESSION['user_id'] ?? 'NULL'));
+error_log("User Role Debug - role: " . ($_SESSION['role'] ?? 'NULL'));
+
+
 // 사용자 역할 반환
 echo json_encode([
     "user_id" => isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null,

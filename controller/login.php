@@ -19,6 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['role'] = $user['role'];  // 사용자 역할 
         $_SESSION['name'] = $user['name'];  // 사용자 이름
 
+        // ✅ 세션 값 확인을 위한 디버깅 추가
+        error_log("Login Debug - user_id: " . $_SESSION['user_id']);
+        error_log("Login Debug - role: " . $_SESSION['role']);
+
         // 대시보드 페이지로 리다이렉트
         error_log("로그인 성공: user_id=".$_SESSION['user_id'].", role=".$_SESSION['role']);
         header("Location: ../view/notice_list.html");
