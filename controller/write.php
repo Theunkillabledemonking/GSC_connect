@@ -8,14 +8,22 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'profess
     echo json_encode(["status" => "error", "message" => "글 작성 권한이 없습니다."]);
     exit;
 }
-// 폼 데이터 가져오기 및 검증
-$title = isset($_POST['title']) ? trim($_POST['title']) : '';
-$content = isset($_POST['content']) ? trim($_POST['content']) : '';
-$author_id = isset($_POST['user_id']); // 작성자 ID
+// 세션에서 데이터 가져오기 및 폼 데이터 검증
+$title = isset($_POST['title']) ? trim($_POST['title']) : ''; // 제목
+$content = isset($_POST['content']) ? trim($_POST['content']) : ''; // 내용
+$author_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; // 작성자 ID
 
+// 제목과 내용 검증
 if (empty($title) || empty($content)) {
     http_response_code(400); // 400 Bad Request *(잘못된 요청)
     echo json_encode(["status" => "error", "message" => "제목과 내용을 입력해야 합니다."]);
+    exit;
+}
+
+// 작성자 ID 검증
+if (empty($author_id)) {
+    http_response_code(403); // 권한 없음
+    echo json_encode(["status" => "error", "message" => "작성자 정보가 유효하지 않습니다."]);
     exit;
 }
 

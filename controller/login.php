@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 비밀번호 검증 및 로그인 처리
     if ($user && password_verify($password, $user['password'])) {
         // 세션에 사용자 정보 저장
-        $_SESSION['user_id'] = $user['student_id']; // 사용자 ID
+        $_SESSION['user_id'] = $user['id']; // 사용자 ID
         $_SESSION['role'] = $user['role'];  // 사용자 역할 
         $_SESSION['name'] = $user['name'];  // 사용자 이름
 
