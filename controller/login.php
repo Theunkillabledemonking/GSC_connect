@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 세션에 사용자 정보 저장
         $_SESSION['user_id'] = $user['student_id']; // 사용자 ID
         $_SESSION['role'] = $user['role'];  // 사용자 역할 
-        $_SESSION['user_name'] = $user['name'];  // 사용자 이름
+        $_SESSION['name'] = $user['name'];  // 사용자 이름
 
         // 대시보드 페이지로 리다이렉트
         header("Location: ../view/notice_list.html");
