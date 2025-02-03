@@ -1,7 +1,8 @@
 <?php
 require_once '../model/User.php'; // User 모델 포함
-session_start(); // 세션 시작
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // 1. 로그인 요청 확인
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 사용자 입력 데이터 가져오기

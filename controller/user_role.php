@@ -1,6 +1,7 @@
 <?php
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // 로그인 여부 확인
 if (!isset($_SESSION['role'])) {
     http_response_code(401); // 인증되지 않은 사용자
