@@ -59,7 +59,7 @@ class Notice {
             // 작성자 본인만 수정할 수 있도록 제한합니다.
             $sql = "UPDATE notices SET title = ?, content = ? WHERE id = ? AND author_id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssii", $title, $content. $notice_id, $author_id);
+            $stmt->bind_param("ssii", $title, $content, $notice_id, $author_id);
         }
         
         // 쿼리 실행후 결과 반환
@@ -150,7 +150,7 @@ class Notice {
         $search = isset($search) ? "%".$search."%" : "%";
 
         // 검색 옵션에 따라 WHERE 조건 다르게 설정
-        $whereClause = $option === 'author' ? "users.name LIKE ?" : "notices.title LIKE ?";
+        $column = ($option === 'author') ? "users.name" : "notices.title";
 
         /**
          * 공지사항 목록을 조회하는 SQL 쿼리
@@ -162,8 +162,8 @@ class Notice {
         $sql = "SELECT notices.id, notices.title, notices.content, notices.created_at, users.name AS author_name
                 FROM notices
                 JOIN users ON notices.author_id = users.id
-                WHERE $whereClause
-                ORDER BY notices.created_at DESC 
+                WHERE $column LIKE ?
+                ORDER BY notices.created_at DESC
                 LIMIT ? OFFSET ?";
 
         $stmt = $conn->prepare($sql); // sql 준비비
