@@ -4,7 +4,7 @@ session_start();
 // 로그인 여부 확인
 if (!isset($_SESSION['role'])) {
     http_response_code(401); // 인증되지 않은 사용자
-    echo json_encode(["error" => "로그인되지 않았습니다."]);
+    echo json_encode(["status" => "error", "message" => "로그인되지 않았습니다."]);
     exit;
 }
 
