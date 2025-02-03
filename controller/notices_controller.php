@@ -1,5 +1,7 @@
 <?php
 require_once '../model/Notice.php';
+require_once '../config/config.php';
+
 header('Content-Type: application/json');
 
 // 에러 디스플레이 활성화 (디버깅 용도)
@@ -15,7 +17,7 @@ try {
 // model에서 데이터 가져오기
     $data = Notice::getAll($search, $option, $page);
     // JSON 형식으로 응답
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(array('error' => $e->getMessage()));

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("로그아웃 되었습니다.");
                     window.location.href = "../view/login_form.html"; // 로그인 페이지로 이동
                 } else {
-                    alert("로그아웃 실패. 다시ㅏ 시도해주세요");
+                    alert("로그아웃 실패. 다시 시도해주세요");
                 }
             })
             .catch(error => console.error("로그아웃 요청 실패", error));
