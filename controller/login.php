@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['name'] = $user['name'];  // 사용자 이름
 
         // 대시보드 페이지로 리다이렉트
+        error_log("로그인 성공: user_id=".$_SESSION['user_id'].", role=".$_SESSION['role']);
         header("Location: ../view/notice_list.html");
         exit;
     } else {

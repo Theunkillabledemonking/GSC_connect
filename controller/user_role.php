@@ -10,8 +10,8 @@ if (!isset($_SESSION['role'])) {
 
 // 사용자 역할 반환
 echo json_encode([
-    "user_id" => $_SESSION['user_id'],
-    "role" => $_SESSION['role'], // 세션에서 역할 가져오기
-    "name" => isset($_SESSION['name']) ? $_SESSION['name'] : null // 사용자 이름도 반환
+    "user_id" => isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null,
+    "role" => isset($_SESSION['role']) ? $_SESSION['role'] : null,
+    "name" => isset($_SESSION['name']) ? $_SESSION['name'] : null
 ]);
 ?>
