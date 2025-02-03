@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
      * 글쓰기 버튼 클릭 시 이동
      */
     writeBtn.addEventListener("click", () => {
-        window.location.href = "../view/notice_list.html"; // 글쓰기 페이지로 이동
+        window.location.href = "../view/write_form.html"; // 글쓰기 페이지로 이동
     });
 
     /**

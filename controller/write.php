@@ -11,7 +11,7 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'profess
 // 폼 데이터 가져오기 및 검증
 $title = isset($_POST['title']) ? trim($_POST['title']) : '';
 $content = isset($_POST['content']) ? trim($_POST['content']) : '';
-$author_id = isset($_POST['author_id']); // 작성자 ID
+$author_id = isset($_POST['user_id']); // 작성자 ID
 
 if (empty($title) || empty($content)) {
     http_response_code(400); // 400 Bad Request *(잘못된 요청)
