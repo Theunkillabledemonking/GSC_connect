@@ -8,7 +8,7 @@ $option = isset($_GET['option']) ? $_GET['option'] : 'title'; // 기본값 제�
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 // model에서 데이터 가져오기
-$data = Notice::getAll($serch, $option, $page);
+$data = Notice::getAll($search, $option, $page);
 
 // JSON 형식으로 응답
 echo json_encode($data);

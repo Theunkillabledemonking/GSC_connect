@@ -7,9 +7,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevPageBtn = document.getElementById("prevPage"); // 이전 페이지 버튼
     const nextPageBtn = document.getElementById("nextPage"); // 다음 페이지 버튼
     const pageInfo = document.getElementById("pageInfo"); // 현재 페이지 정보 표시
+    const writeBtn = document.getElementById("writeBtn"); // 글쓰기 버튼
 
     let currentPage = 1; // 현재 페이지 번호 (초기값 : 1)
     let totalPages = 1; // 전체 페이지 개수 (초기값 : 1)
+
+    /**
+     * 사용자 권한 확인 및 글쓰기 버튼 표시
+     */
+    fetch('../controller/user_role.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("사용자 권한 정보를 가져올 수 없습니다.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("받은 사용자 데이터:", data); // 디버깅용
+            if (data.role === 'admin' || data.role === 'admin') {
+                writeBtn.style.display = "inline-block"; // 관리자/교수인 경우 글쓰기 버튼 표시
+            } else {
+                console.log("사용자 권한이 부족하여 글쓰기 버튼이 표시되지 않습니다.");
+            }
+        })
+        .catch(error => {console.error("권한 정보 로드 실패:", error)});
 
     /**
      * 공지사항 목록 불러오기

@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $search = isset($_GET['search']) ? $_GET['search'] : null;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-$data = Notice::getAll($serch, $page);
+$data = Notice::getAll($search, $page);
 
 echo json_encode($data);
 
