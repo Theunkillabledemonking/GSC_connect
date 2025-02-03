@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];    // 비밀번호
 
     // DB에서 사용자 정보 조회 
-    $user = User::getUserById($student_id, $password);
+    $user = User::getUserById($student_id);
 
     // 비밀번호 검증 및 로그인 처리
     if ($user && password_verify($password, $user['password'])) {

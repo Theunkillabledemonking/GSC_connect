@@ -29,7 +29,7 @@ class User {
         $conn = connect_db(); // 데이터베이스 연결
 
         // 학번으로 사용자 정보 조회
-        $sql = "SELECT student_id, name, role, password FROM users WHERE student_id = ?";
+        $sql = "SELECT id, student_id, name, role, password FROM users WHERE student_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $student_id);
         $stmt->execute();
