@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentPage = 1; // 현재 페이지 번호 (초기값 : 1)
     let totalPages = 1; // 전체 페이지 개수 (초기값 : 1)
-    
 
     /**
      * 사용자 권한 확인 및 글쓰기 버튼 표시
@@ -123,6 +122,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentPage < totalPages) {
             loadNotices(searchInput.value.trim(), searchOption.value, currentPage + 1);
         }
+    });
+
+    /**
+     * 글쓰기 버튼 클릭 시 이동
+     */
+    writeBtn.addEventListener("click", () => {
+        window.location.href = "../view/notice_list.html"; // 글쓰기 페이지로 이동
     });
 
     /**

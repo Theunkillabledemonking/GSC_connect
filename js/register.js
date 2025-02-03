@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             console.log("✅ 비밀번호가 일치합니다! 폼 제출을 진행합니다.");
             registerForm.submit(); // 비밀번호가 일치할 경우 폼 제출
+            alert("로그인 완료!");
+            window.location.href = "../view/login_form.html"; // 로그인 페이지로 이동
         }
     });
 });
