@@ -143,14 +143,17 @@ class Notice {
         $conn = connect_db(); // 데이터베이스 연결
 
         // 페이지네이션을 위한 OFFSET 계산 (0부터 시작)
-        $offset = ($page - 1) * $limit;
+        $page = max(1, (int)$page); // 페이지 번호 최소 1 이상
+        $limit = max(1, (int)$limit); // 한 페이지당 표시할 개수 최소 1 이상
+        $offset = ($page - 1) * $limit; // offset 계산
         
         // 검색어가 입력된 경우,, SQL 'LIKE' 연산을 사용하기 위해 % 추가
         // 검색어가 없으면 기본값 "%"를 사용해 모든 데이터 조회
         $search = isset($search) ? "%".$search."%" : "%";
 
         // 검색 옵션에 따라 WHERE 조건 다르게 설정
-        $column = ($option === 'author') ? "users.name" : "notices.title";
+        $allowedColumns = ['author' => 'user.name', 'title' => 'notices.title'];
+        $column = $allowedColumns[$option] ?? 'notices.title'; // 기본값 title
 
         /**
          * 공지사항 목록을 조회하는 SQL 쿼리
@@ -184,7 +187,7 @@ class Notice {
          */
         $count_sql = "SELECT COUNT(*) AS total FROM notices
                       JOIN users ON notices.author_id = users.id
-                      WHERE $whereClause";
+                      WHERE $column LIKE ?";
 
         $count_stmt = $conn->prepare($count_sql); // SQL 준비
         $count_stmt->bind_param("s", $search); // 파라미터 바인딩

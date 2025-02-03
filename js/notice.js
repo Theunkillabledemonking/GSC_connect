@@ -12,10 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1; // 현재 페이지 번호 (초기값 : 1)
     let totalPages = 1; // 전체 페이지 개수 (초기값 : 1)
     
-    
-    document.addEventListener("DOMContentLoaded", () => {
-        console.log("이벤트확인");
-    })
+
     /**
      * 사용자 권한 확인 및 글쓰기 버튼 표시
      */
@@ -48,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
         .catch(error => console.error("권한 정보 로드 실패:", error));
+
     /**
      * 공지사항 목록 불러오기
      * - 검색어와 페이지 번호를 매개변수로 받아 해당 데이터를 서버에서 가져옴
