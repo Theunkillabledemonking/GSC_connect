@@ -13,6 +13,16 @@ $title = isset($_POST['title']) ? trim($_POST['title']) : ''; // 제목
 $content = isset($_POST['content']) ? trim($_POST['content']) : ''; // 내용
 $author_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; // 작성자 ID
 
+if (empty($author_id)) {
+    http_response_code(403);
+    echo json_encode([
+        "status" => "error",
+        "message" => "작성자 정보가 유효하지 않습니다.",
+        "debug" => $_SESSION // 디버깅용: 세션 정보 출력
+    ]);
+    exit;
+}
+
 // 제목과 내용 검증
 if (empty($title) || empty($content)) {
     http_response_code(400); // 400 Bad Request *(잘못된 요청)
