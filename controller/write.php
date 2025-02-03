@@ -16,8 +16,7 @@ $author_id = $_SESSION['user_id']; // 작성자 ID
 
 // 공지사항 작성
 if (Notice::create($title, $content, $author_id)) {
-    http_response_code(200); // 성공
+    http_response_code(200); // 성/
 } else {
     http_response_code(500); // 서버 오류
 }
-?>
