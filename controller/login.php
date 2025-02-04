@@ -29,13 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // ✅ 디버깅 로그 추가
         error_log("Login Debug - user_id: " . $_SESSION['user_id']);
-        error_log("Login Debug - role: " . $_SESSION['role']);
 
         // ✅ 로그인 성공 메시지 로그 기록
         error_log("로그인 성공: user_id=".$_SESSION['user_id'].", role=".$_SESSION['role']);
 
         // 6. JSON 응답 반환 (AJAX 요청을 고려)
-        echo json_encode(["status" => "success", "redirect" => "../view/notice_list.html"]);
+        echo json_encode(["status" => "success", "redirect" => "../view/notice_list.php"]);
         exit;
     } else {
         // 7. 로그인 실패 처리
