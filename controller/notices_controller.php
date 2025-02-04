@@ -1,4 +1,9 @@
 <?php
+// 세션 시작 (세션이 없을 경우)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once '../model/Notice.php'; // 모델 포함
 require_once '../config/config.php';
 header('Content-Type: application/json'); // Json 응답을 보내기 위한 헤더 설정
@@ -15,12 +20,16 @@ $page = (int)($_GET['page'] ?? 1); // 페이지 번호
 $action = $_GET['action'] ?? 'search'; // 요청 유형 (기본값: 검색)
 
 error_log("DEBUG: Received action - $action");
-if ($action == 'search') {
-    error_log("DEBUG: Search Parameters - search: $search, option: $option, page: $page");
-} elseif ($action == 'detail') {
+if ($action == 'detail' && isset($_GET['id'])) {
+    $notice_id = (int)$_GET['id'];
     error_log("DEBUG: Detail Request for ID - $notice_id");
-} elseif ($action == 'delete') {
-    error_log("DEBUG: Delete Request by User - user_id: $user_id, role: $user_role");
+
+    $notice = Notice::getById($notice_id);
+    // ...
+} elseif ($action == 'detail') {
+    $notice_id = (int)$_GET['id'];
+    error_log("DEBUG: Detail Request for ID - $notice_id");
+    $notice = Notice::getById($notice_id);
 }
 
 // 1. 검색 요청 처리 (`action=search`)
@@ -52,8 +61,8 @@ if ($action == 'detail' && isset($_GET['id'])) {
 
 // 3. 공지사항 삭제 요청 (`action=delete$id=숫자`)
 if ($action == 'delete' && isset($_GET['id'])) {
-    session_start(); // 세션 시작 (사용자 정보 확인)
-    $user_role = $_SESSION['user_role'] ?? 'student'; // 사용자 역할
+
+    $user_role = $_SESSION['role'] ?? 'student'; // 사용자 역할
     $user_id = $_SESSION['user_id'] ?? null; // 로그인된 사용자 ID
 
     $notice_id = (int)$_GET['id']; // 삭제할 공지사항 ID 가져오기

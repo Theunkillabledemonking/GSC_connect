@@ -45,25 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(data => {
             console.log("받은 사용자 데이터:", data); // 디버깅용
-            if (data.role === 'admin' || data.role === 'admin') {
+            if (data.role === 'admin' || data.role === 'professor') {
                 writeBtn.style.display = "inline-block"; // 관리자/교수인 경우 글쓰기 버튼 표시
             } else {
                 console.log("사용자 권한이 부족하여 글쓰기 버튼이 표시되지 않습니다.");
             }
         })
         .catch(error => {console.error("권한 정보 로드 실패:", error)});
-
-    /**
-     * 사용자 권한 확인 및 글쓰기 버튼 표시
-     */
-    fetch('../controller/user_role.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.role === 'admin' || data.role === 'professor') {
-                writeBtn.style.display = "inline-block"; // 버튼 표시
-            }
-        })
-        .catch(error => console.error("권한 정보 로드 실패:", error));
 
     /**
      * 공지사항 목록 불러오기
@@ -74,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
      * @param {string} search 검색어 (작성자 또는 제목)
      * @param {number} page 현재 페이지 번호
      */
-    function loadNotices(search = "", page = 1) {
+    function loadNotices(search = "", searchOption = "", page = 1) {
         fetch(`../controller/notices_controller.php?search=${encodeURIComponent(search)}&page=${page}`)
         .then(response => response.json()) // 서버 응답을 JSON 형식으로 변환
         .then(data => {
@@ -128,16 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
             // HTMl 요소에  데이터 채우기
             noticeTitle.textContent = data.title;
             noticeAuthor.textContet = data.author_name;
-            noticeDate.textContent = new Data(data.created_at).toLocaleDateString();
+            noticeDate.textContent = new Date(data.created_at).toLocaleDateString();
             noticeContent.textContent = data.content;
 
             // 사용자 권한 확인 후 수정/삭제 버튼 표시
             fetch('../controller/user_role.php')
                 .then(response => response.json()) // 사용자 권한 정보 가져오기
             .then(data => {
-                if (user.role === 'admin' || (user.role === 'professor' || user.role === 'admin')) {
-                    editBtn.style.display = "inline-block"; // 수정 버튼 표시
-                    deleteBtn.style.disPlay = "inline-block"; // 삭제 버튼 표시
+                if (data.role === 'admin' || data.role === 'professor') {
+                    editBtn.style.display = "inline-block";
+                    deleteBtn.style.display = "inline-block";
                 }
             });
         })
