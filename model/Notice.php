@@ -98,7 +98,7 @@ class Notice {
         }
         
         // 쿼리 실행 후 결과 반환
-        if ($stmt->execute()) {
+        if ($stmt->execute() && $stmt->affected_rows > 0) {
             $stmt->close(); // 쿼리 종료
             $conn->close(); // DB 종료
             return true; // 삭제 성공

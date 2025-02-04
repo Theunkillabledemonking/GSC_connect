@@ -1,48 +1,69 @@
 <?php
-require_once '../model/Notice.php';
+require_once '../model/Notice.php'; // 모델 포함
 require_once '../config/config.php';
-header('Content-Type: application/json');
+header('Content-Type: application/json'); // Json 응답을 보내기 위한 헤더 설정
 
 // 에러 디스플레이 활성화 (디버깅 용도)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$search = isset($_GET['search']) ? $_GET['search'] : null;
-$option = isset($_GET['option']) ? $_GET['option'] : 'title'; // 기본값 제목 검색
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// GET 요청에서 필요한 매개변수 가져오기
+$search = $_GET['search'] ?? null; // 검색어
+$option = $_GET['option'] ?? 'title'; // 검색 옵션
+$page = (int)($_GET['page'] ?? 1); // 페이지 번호
+$action = $_GET['action'] ?? 'search'; // 요청 유형 (기본값: 검색)
 
-// GET 요청에서 검색어, 옵션, 페이지 번호 가져오기
-try {
-    // model에서 데이터 가져오기
-    $data = Notice::getAll($search, $option, $page);
-    // JSON 형식으로 응답
-    echo json_encode($data);
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(array('error' => $e->getMessage()));
+// 1. 검색 요청 처리 (`action=search`)
+if ($action == 'search') {
+    try {
+        $data = Notice::getAll($search, $option, $page); // 검색된 공지 가져오기
+        echo json_encode($data);
+    } catch (Exception $e) {
+        http_response_code(500); // 내부 서버 오류
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+    exit; // 검색 요청이 끝났으므로 여기서 코드 종료
 }
 
-// URL에서 'id' 값이 없는 경우 오류 반환
-if (!isset($_GET['id'])) {
-    http_response_code(400); // 잘못된 요청 (Bad Request)
-    echo json_encode(["error" => "잘못된 요청입니다."]); // 오류 메시지 반환
+// 2. 상세 조회 요청 처리 (`action=detail&id=숫자`)
+if ($action == 'detail' && isset($_GET['id'])) {
+    $notice_id = (int)$_GET['id']; // 공지사항 ID 가져오기
+    $notice = Notice::getById($notice_id); // 해당 ID의 공지사항 가저오기
+
+    if (!$notice) {
+        http_response_code(404); // 찾을 수 없음
+        echo json_encode(['error' => 'Notice not found.']);
+        exit;
+    }
+
+    echo json_encode($notice);
     exit;
 }
 
-// 전달받은 공지사항 ID를 정수로 변환
-$notice_id = (int)$_GET['id'];
+// 3. 공지사항 삭제 요청 (`action=delete$id=숫자`)
+if ($action == 'delete' && isset($_GET['id'])) {
+    session_start(); // 세션 시작 (사용자 정보 확인)
+    $user_role = $_SESSION['user_role'] ?? 'student'; // 사용자 역할
+    $user_id = $_SESSION['user_id'] ?? null; // 로그인된 사용자 ID
 
-// 공지사항을 조회
-$notice = Notice::getById($notice_id);
+    $notice_id = (int)$_GET['id']; // 삭제할 공지사항 ID 가져오기
 
-// 공지사항이 존재하지 않으면 404 오류로 반환
-if (!$notice) {
-    http_response_code(404); // 찾을 수 없음 (Not Found)
-    echo json_encode(["error" => "게시글을 찾을 수 없습니다."]); // 오류 메시지 반환
-    exit; // 실행 종료
+    // 삭제 권한 확인 (관리자는 모든 글 삭제 가능, 교수는 본인 글만 삭제 가능)
+    if ($user_role == 'admin' || ($user_role == 'professor' && Notice::getAuthorID($notice_id) == $user_id)) {
+        if (Notice::delete($notice_id, $user_role, $user_id)) {
+            echo json_encode(['success' => true]); //성공 응답
+        } else {
+            http_response_code(403); // 권한 없음
+            echo json_encode(['error' => '삭제 실패 또는 권한이 없음']);
+        }
+    } else {
+        http_response_code(403); // 권한 없음
+        echo json_encode(["error" => "권한이 없습니다."]);
+    }
+    exit;
 }
-
-// 정상적으로 데이터를 json으로 반환
-echo json_encode($notice);
+// ❌ 잘못된 요청 처리
+http_response_code(400);
+echo json_encode(["error" => "잘못된 요청입니다."]);
 ?>
