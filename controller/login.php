@@ -1,10 +1,11 @@
 <?php
-require_once '../model/User.php'; // User 모델 포함
 
 // 세션 시작 (세션이 없을 경우)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+require_once '../model/User.php'; // User 모델 포함
+
 header('Content-Type: application/json; charset=utf-8');
 
 // 1. 로그인 요청 확인 (POST 방식인지 확인)
