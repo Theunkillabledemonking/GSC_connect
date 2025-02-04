@@ -2,8 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // 2. 로그인 폼 가져오기
     const loginForm = document.getElementById("loginForm");
-    console.log("URL Params:", window.location.search);
-    console.log("Notice ID:", noticeId);
+
     // 3. 폼이 존재하는지 확인
     if (!loginForm) {
         console.error("로그인 폼을 찾을 수 없습니다.");

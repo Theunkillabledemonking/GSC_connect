@@ -78,7 +78,7 @@ class Notice {
      * 공지사항 삭제
      * 
      * @param int $notice_id 삭제할 공지사항 ID
-     * @return bool 삭제 성공 여부부
+     * @return bool 삭제 성공 여부
      */
     public static function delete($notice_id, $user_role, $author_id = null) {
         $conn = connect_db(); // DB 연결

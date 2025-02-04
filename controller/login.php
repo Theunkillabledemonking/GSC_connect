@@ -5,6 +5,7 @@ require_once '../model/User.php'; // User 모델 포함
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+header('Content-Type: application/json; charset=utf-8');
 
 // 1. 로그인 요청 확인 (POST 방식인지 확인)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

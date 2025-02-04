@@ -14,6 +14,15 @@ $option = $_GET['option'] ?? 'title'; // 검색 옵션
 $page = (int)($_GET['page'] ?? 1); // 페이지 번호
 $action = $_GET['action'] ?? 'search'; // 요청 유형 (기본값: 검색)
 
+error_log("DEBUG: Received action - $action");
+if ($action == 'search') {
+    error_log("DEBUG: Search Parameters - search: $search, option: $option, page: $page");
+} elseif ($action == 'detail') {
+    error_log("DEBUG: Detail Request for ID - $notice_id");
+} elseif ($action == 'delete') {
+    error_log("DEBUG: Delete Request by User - user_id: $user_id, role: $user_role");
+}
+
 // 1. 검색 요청 처리 (`action=search`)
 if ($action == 'search') {
     try {
