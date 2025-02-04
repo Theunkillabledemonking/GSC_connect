@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 if (data.status === "success") {
                     alert("Success!"); // 성공 메시지 출력
-                    window.location.href = "../view/notice_list.html"; // 게시판 목록으로 이동
+                    window.location.href = "../view/notice_list.php"; // 게시판 목록으로 이동
                 } else {
                     alert(data.message); // 오류 메세지 출력
                 }

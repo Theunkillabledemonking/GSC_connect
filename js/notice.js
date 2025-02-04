@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             if (data.error) {
                 alert("게시글을 찾을 수 없습니다.");
-                window.location.href = "./notice_list.html";
+                window.location.href = "./notice_list.php";
                 return;
             }
 
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(result => {
                 if (result.success) {
                     alert("삭제되었습니다.");
-                    window.location.href = "../view/notice_list.html"; // 목록 페이지로 이동
+                    window.location.href = "../view/notice_list.php"; // 목록 페이지로 이동
                 } else {
                     alert("삭제 권한이 없습니다."); // 권한이 없음 메시지
                 }
