@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('잘못된 접근입니다. 로그인 후 이용하세요.'); window.location.href = 'login_form.html';</script>";
+exit;
+}
+
+// 세션 디버깅 정보 출력
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,19 +44,5 @@
         <span id="pageInfo"></span>
         <button id="nextPage">다음</button>
     </div>
-    <?php
-session_start();
-
-// 세션 확인
-if (!isset($_SESSION['user_id'])) {
-    echo "<script>alert('잘못된 접근입니다. 로그인 후 이용하세요.'); window.location.href = 'login.html';</script>";
-    exit;
-    }
-
-    // 세션 정보 확인
-    echo "사용자 ID: " . $_SESSION['user_id'];
-    echo "사용자 이름: " . $_SESSION['name'];
-    echo "사용자 역할: " . $_SESSION['role'];
-    ?>
 </body>
 </html>
