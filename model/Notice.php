@@ -205,5 +205,28 @@ class Notice {
             'current_page' => $page // 현재 페이지 번호
         ];
     }
+
+    /**
+     * 특정 ID에 해당하는 공지사항을 가져오는 메서드
+     *
+     * @param int $notice_id 공지사항 ID
+     * @param array|null 공지사항 데이터 또는 null (존재하지 않는 경우)
+     */
+    public static function getById($notice_id){
+        $conn = connect_db(); // DB 연결
+
+        // 공지사항 정보와 작성자 이름을 함께 조회하는 SQL 쿼리
+        $sql = "SELECT n.*, u.name AS author_name FROM notices n
+                JOIN users u ON n.author_id = u.id WHERE n.id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $notice_id); // 공지사항 ID를 바인딩
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $notice = $result->fetch_assoc(); // 결과를 배열로 가져옴
+
+        $stmt->close(); // 쿼리 종료
+        $conn->close(); // DB 연겨 종료
+        return $notice;
+    }
 }
 ?>

@@ -23,4 +23,26 @@ try {
     echo json_encode(array('error' => $e->getMessage()));
 }
 
+// URL에서 'id' 값이 없는 경우 오류 반환
+if (!isset($_GET['id'])) {
+    http_response_code(400); // 잘못된 요청 (Bad Request)
+    echo json_encode(["error" => "잘못된 요청입니다."]); // 오류 메시지 반환
+    exit;
+}
+
+// 전달받은 공지사항 ID를 정수로 변환
+$notice_id = (int)$_GET['id'];
+
+// 공지사항을 조회
+$notice = Notice::getById($notice_id);
+
+// 공지사항이 존재하지 않으면 404 오류로 반환
+if (!$notice) {
+    http_response_code(404); // 찾을 수 없음 (Not Found)
+    echo json_encode(["error" => "게시글을 찾을 수 없습니다."]); // 오류 메시지 반환
+    exit; // 실행 종료
+}
+
+// 정상적으로 데이터를 json으로 반환
+echo json_encode($notice);
 ?>

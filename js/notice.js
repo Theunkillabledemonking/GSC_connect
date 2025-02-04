@@ -9,6 +9,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageInfo = document.getElementById("pageInfo"); // 현재 페이지 정보 표시
     const writeBtn = document.getElementById("writeBtn"); // 글쓰기 버튼
 
+    // URL에서 'id' 값을 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const noticeId = urlParams.get("noticeId");
+
+    // 'id'가 없으면 목록 페이지로 이동
+    if (!noticeId) {
+        alert("잘못된 접근입니다.");
+        window.location.href = "../view/notice_list.html";
+        return;
+    }
+
+    // HTML 요소 가져오기
+    const noticeTitle = document.getElementById("noticeTitle");
+    const noticeAuthor = document.getElementById("noticeAuthor");
+    const noticeDate = document.getElementById("noticeDate");
+    const noticeContent = document.getElementById("noticeContent");
+    const editBtn = document.getElementById("editBtn");
+    const deleteBtn = document.getElementById("deleteBtn");
+
     let currentPage = 1; // 현재 페이지 번호 (초기값 : 1)
     let totalPages = 1; // 전체 페이지 개수 (초기값 : 1)
 
@@ -92,6 +111,63 @@ document.addEventListener("DOMContentLoaded", () => {
             noticeList.innerHTML = "<p>데이터를 불러오는 데 실패했습니다.</p>";
         });
     }
+
+    /**
+     * 공지사항 상세 정보 가져오기
+     */
+    fetch(`../controller/notices_controller.php?id=${noticeId}`)
+        .then(response => response.json()) // JSON 응답을 받아오기
+        .then(data => {
+            if (data.error) {
+                alert("게시글을 찾을 수 없습니다.");
+                window.location.href = "./notice_list.html";
+                return;
+            }
+
+            // HTMl 요소에  데이터 채우기
+            noticeTitle.textContent = data.title;
+            noticeAuthor.textContet = data.author_name;
+            noticeDate.textContent = new Data(data.created_at).toLocaleDateString();
+            noticeContent.textContent = data.content;
+
+            // 사용자 권한 확인 후 수정/삭제 버튼 표시
+            fetch('../controller/user_role.php')
+                .then(response => response.json()) // 사용자 권한 정보 가져오기
+            .then(data => {
+                if (user.role === 'admin' || (user.role === 'professor' || user.role === 'admin')) {
+                    editBtn.style.display = "inline-block"; // 수정 버튼 표시
+                    deleteBtn.style.disPlay = "inline-block"; // 삭제 버튼 표시
+                }
+            });
+        })
+        .catch(error => { console.error("데이터 로드 실패", error); }); // 오류 처리
+
+    /**
+     * 삭제 버튼 클릭 시 이벤트 처리
+     */
+    deleteBtn.addEventListener("click", () => {
+        if (!confirm("정말 삭제하시겠습니까?")) return;
+
+        fetch(`../controller/notices_controller.php?id=${noticeId}`, {method : "DELETE"})
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert("삭제되었습니다.");
+                    window.location.href = "../view/notice_list.html"; // 목록 페이지로 이동
+                } else {
+                    alert("삭제 권한이 없습니다."); // 권한이 없음 메시지
+                }
+            })
+            .catch(error => console.error("삭제 실패:", error));
+    });
+
+    /**
+     * 수정 버튼 클릭 시 수정 페이지로 이동
+     */
+    editBtn.addEventListener("click", () => {
+        window.location.href = `edit.html?id=${noticeId}`; // 수정페이지로 이동
+    });
+
 
     /**
      * 검색 버튼 클릭 이벤트 리스너
