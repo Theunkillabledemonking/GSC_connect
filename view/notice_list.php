@@ -1,20 +1,29 @@
 <?php
 session_start();
 
-// 세션 디버깅
-if (!isset($_SESSION['user_id'])) {
-    error_log("세션 없음: 잘못된 접근입니다."); // Apache 로그에 기록
-    echo "<script>alert('잘못된 접근입니다. 로그인 후 이용하세요.'); window.location.href = 'login_form.html';</script>";
+
+// URL에서 noticeId 가져오기
+$noticeId = isset($_GET['noticeId']) ? $_GET['noticeId'] : null;
+
+// noticeId 값 확인
+if (!$noticeId) {
+    // noticeId가 없을 경우 index.html로 리다이렉트
+    error_log("잘못된 접근: noticeId가 없습니다.");
+    header("Location: index.html");
     exit;
-} else {
-    error_log("세션 있음: user_id=" . $_SESSION['user_id']);
-    echo "<pre>";
-    print_r($_SESSION); // 세션 값 확인
-    echo "</pre>";
 }
-// 예시: notice_list.php?id=1
-header("Location: notice_list.php?noticeId=" . $noticeId);
-exit;
+
+// 세션 확인
+if (!isset($_SESSION['user_id'])) {
+    error_log("세션 없음: 잘못된 접근입니다.");
+    header("Location: login_form.html");
+    exit;
+}
+
+// 세션 디버깅 정보 출력
+error_log("세션 있음: " . print_r($_SESSION, true));
+
+// 이후 공지사항 처리 로직...
 ?>
 
 <!DOCTYPE html>
