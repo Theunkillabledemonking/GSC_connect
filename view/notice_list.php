@@ -9,7 +9,7 @@ $noticeId = isset($_GET['noticeId']) ? $_GET['noticeId'] : null;
 if (!$noticeId) {
     // noticeId가 없을 경우 index.html로 리다이렉트
     error_log("잘못된 접근: noticeId가 없습니다.");
-    header("Location: login_form.php");
+    header("Location: login_form.html");
     exit;
 }
 
