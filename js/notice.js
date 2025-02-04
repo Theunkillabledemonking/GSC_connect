@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const noticeId = urlParams.get("noticeId");
 
+    console.log("Notice ID:", noticeId); // Notice ID 디버깅
+
     if (!noticeId) {
         alert("잘못된 접근입니다.");
         window.location.href = "../view/index.html";

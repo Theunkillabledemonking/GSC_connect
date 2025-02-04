@@ -12,6 +12,9 @@ if (!isset($_SESSION['user_id'])) {
     print_r($_SESSION); // 세션 값 확인
     echo "</pre>";
 }
+// 예시: notice_list.php?id=1
+header("Location: notice_list.php?noticeId=" . $noticeId);
+exit;
 ?>
 
 <!DOCTYPE html>
