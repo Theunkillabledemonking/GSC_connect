@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 'id'가 없으면 목록 페이지로 이동
     if (!noticeId) {
         alert("잘못된 접근입니다.");
-        window.location.href = "../view/notice_list.html";
+        window.location.href = "../view/index.html";
         return;
     }
 
